@@ -141,6 +141,10 @@ module.exports.getdashboardHome = async (req, res, next)=>{
    return res.status(200).render('dashboardHome',{user:req.session.user})
 }
 
+module.exports.getdashboardhome = async (req, res, next)=>{
+   return res.status(200).render('dashboardHome',{user:req.session.user})
+}
+
 
 module.exports.getkyc = async (req, res, next)=>{
    return res.status(200).render('dashboardHome',{user:req.session.user})
