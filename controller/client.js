@@ -125,7 +125,7 @@ module.exports.postlogin = async (req, res, next) => {
       req.session.user = userExist
 
       //get all attorneys
-      return res.status(200).render('dashboardhome',{user:req.session.user})
+      return res.status(200).render('dashboardHome',{user:req.session.user})
 
    } catch (error) {
       error.message = error.message || "an error occured try later"
@@ -137,13 +137,13 @@ module.exports.postlogin = async (req, res, next) => {
 
 }
 
-module.exports.getdashboardhome = async (req, res, next)=>{
-   return res.status(200).render('dashboardhome',{user:req.session.user})
+module.exports.getdashboardHome = async (req, res, next)=>{
+   return res.status(200).render('dashboardHome',{user:req.session.user})
 }
 
 
 module.exports.getkyc = async (req, res, next)=>{
-   return res.status(200).render('dashboardhome',{user:req.session.user})
+   return res.status(200).render('dashboardHome',{user:req.session.user})
 }
 
 module.exports.getdeposit = async (req, res, next)=>{
