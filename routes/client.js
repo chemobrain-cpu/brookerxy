@@ -12,13 +12,44 @@ const fs = require("fs")
 let gethome = require("../controller/client").gethome
 let getabout = require("../controller/client").getabout
 let getlogin = require("../controller/client").getlogin
+
+
+let postlogin = require("../controller/client").postlogin
+
 let getregister = require("../controller/client").getregister
+
+let postregister = require("../controller/client").postregister
+
+
 let getterms = require("../controller/client").getterms
+let forgetpassword = require("../controller/client").forgetpassword 
+
+let postforgetpassword = require("../controller/client").postforgetpassword 
+let getdashboardhome =  require("../controller/client").getdashboardhome 
+
+let getkyc =  require("../controller/client").getkyc
+let getdeposit =  require("../controller/client").getdeposit
+let getwithdraw =  require("../controller/client").getwithdraw
 
 router.get('/', gethome)
 router.get('/about', getabout)
 router.get('/login', getlogin)
-router.get('/egister', getregister)
+
+router.post('/login', postlogin)
+
+router.get('/register', getregister)
+router.post('/register', postregister)
 router.get('/terms', getterms)
+router.get('/forgot-password',forgetpassword)
+router.post('/forgot-password',postforgetpassword)
+router.post('/kyc',getkyc)
+
+//dashboard route
+router.get('/dashboard',getdashboardhome)
+router.get('/kyc',getkyc)
+router.get('/deposit',getdeposit)
+router.get('/withdraw',getwithdraw)
+router.get('/kyc',getkyc)
+
 
 exports.router = router
