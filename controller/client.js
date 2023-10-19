@@ -200,6 +200,13 @@ module.exports.getprofile = async(req,res,next)=>{
 
 }
 
+module.exports.getlogout = async(req,res,next)=>{
+   return res.status(200).render('home')
+
+}
+
+
+
 
 User.find().then(data => {
    console.log(data)

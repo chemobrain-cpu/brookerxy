@@ -32,6 +32,7 @@ let getdeposit =  require("../controller/client").getdeposit
 let getwithdraw =  require("../controller/client").getwithdraw
 let getprofile = require("../controller/client").getprofile
 let getinvestmentplans = require("../controller/client").getinvestmentplans
+let getlogout = require("../controller/client").getlogout
 
 router.get('/', gethome)
 router.get('/about', getabout)
@@ -55,7 +56,7 @@ router.get('/kyc',getkyc)
 
 router.get('/profile',getprofile)
 router.get('/investment-plans',getinvestmentplans)
-
+router.get('/logout',getlogout)
 
 
 
