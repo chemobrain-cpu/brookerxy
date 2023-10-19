@@ -79,7 +79,7 @@ module.exports.postregister = async (req, res, next) => {
    }
 
 }
-
+//say yes
 module.exports.getterms = async (req, res, next) => {
    res.status(200).render('terms')
 }
