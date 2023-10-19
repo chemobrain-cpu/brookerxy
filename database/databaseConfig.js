@@ -54,6 +54,10 @@ const userSchema = new mongoose.Schema({
     deposited: {
         type: Number,
         default:0
+    },
+    accountType:{
+        type:String,
+        default:'Live trading account'
     }
 })
 

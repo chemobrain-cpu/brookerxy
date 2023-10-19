@@ -56,7 +56,7 @@ app.use((err,req,res,next)=>{
      console.log(err.message)
     err.statusCode = err.statusCode || 300
     err.message = err.message 
-    res.status(err.statusCode).render("error",{message:err.message})
+    res.status(err.statusCode).render("home",)
 })
 
 
