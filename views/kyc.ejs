@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="/dash/css/bootstrap-imageupload.css">
 
     <link rel="stylesheet" href="/dash/css/font-awesome.css">
-
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1.12.min.js"></script>
 
     <script src="//code.tidio.co/roqbsaxfngxjom6kbxkkgezq7svypyw8.js" async></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -235,15 +235,17 @@
                         </style>
                         <center>
                             <div class="profile-pic">PA</div>
-                            <p style="color:white;"><%=user.fullName%><br>
-                                <%=user.email%></p>
+                            <p style="color:white;">
+                                <%=user.fullName%><br>
+                                    <%=user.email%>
+                            </p>
                         </center>
                     </div>
                 </div>
                 <!-- sidebar menu -->
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="nav-devider"></li>
-                    <li class="">
+                    <li class="active">
                         <a href="/dashboard">
                             <i class="fa fa-bar-chart"></i> <span>Trade Center</span>
                             <span class="pull-right-container">
@@ -251,7 +253,7 @@
                             </span>
                         </a>
                     </li>
-                    <li class="active">
+                    <li class="">
                         <a href="/kyc">
                             <i class="fa fa-id-card"></i> <span>KYC Verification</span>
                             <span class="pull-right-container">
@@ -259,38 +261,9 @@
                             </span>
                         </a>
                     </li>
-                    <li class="">
-                        <a href="/deposit">
-                            <i class="cc BTC-alt"></i> <span>Deposit</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-right pull-right"></i>
-                            </span>
-                        </a>
-                    </li>
-                    <li class="">
-                        <a href="/withdraw">
-                            <i class="fa fa-money"></i> <span>Withdrawal</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-right pull-right"></i>
-                            </span>
-                        </a>
-                    </li>
-                    <li class="">
-                        <a href="upload-/deposit">
-                            <i class="fa fa-money"></i> <span>Transaction Form</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-right pull-right"></i>
-                            </span>
-                        </a>
-                    </li>
-                    <li class="">
-                        <!--<a href="trading-history.php">-->
-                        <!--  <i class="fa fa-line-chart" aria-hidden="true"></i> <span>Trading History</span>-->
-                        <!--  <span class="pull-right-container">-->
-                        <!--    <i class="fa fa-angle-right pull-right"></i>-->
-                        <!--  </span>-->
-                        <!--</a>-->
-                    </li>
+                   
+                   
+
                     <li class="">
                         <a href="/profile">
                             <i class="fa fa-user"></i> <span>Profile</span>
@@ -300,7 +273,7 @@
                         </a>
                     </li>
                     <li class="">
-                        <a href="/investment-plans">
+                        <a href="">
                             <i class="mdi mdi-arrow-up"></i> <span>Investment Plans</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-right pull-right"></i>
@@ -316,7 +289,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/logout">
+                        <a href="">
                             <i class="icon-logout"></i> <span>Logout</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-right pull-right"></i>
@@ -363,7 +336,9 @@
                                 <div class="callout callout-info">
                                     Upload required documents to get verified
                                 </div>
-                                <form class="form" method="post" action="/kyc" enctype="multipart/form-data">
+
+                                <form class="form" method="post" action="/kyc" enctype="multipart/form-data"
+                                    onsubmit="submitForm()">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="imageupload card bg-dark">
@@ -395,7 +370,7 @@
                                                         <span>Browse</span>
                                                         <!-- The file is stored here. -->
                                                         <input type="file" name="facial_passport" accept="image/*"
-                                                            required="">
+                                                            required="" id="passport">
                                                     </label>
                                                     <button type="button"
                                                         class="btn btn-danger btn-block">Remove</button>
@@ -406,8 +381,9 @@
 
                                     <center>
                                         <div class="form-group">
-                                            <button name="verify" type="submit" class="btn btn-danger btn-lg"><i
-                                                    class="fa fa-check-square-o"></i> Verify My Account</button>
+                                            <button name="verify" type="submit" class="btn btn-danger btn-lg"
+                                                id="upload"><i class="fa fa-check-square-o"></i> Verify My
+                                                Account</button>
                                         </div>
                                     </center>
                                 </form>
@@ -431,7 +407,7 @@
     </div>
     <!-- ./wrapper -->
 
-    
+
     <!-- jQuery 3 -->
     <script src="/dash/js/jquery.js"></script>
 
@@ -459,9 +435,9 @@
 
     <!-- Crypto_Admin for Data Table -->
     <script src="/dash/js/pages/data-table.js"></script>
-	
-	<!--chats modifications-->
-    <script src="/dash/js/bootstrap-imageupload.js"></script>	
+
+    <!--chats modifications-->
+    <script src="/dash/js/bootstrap-imageupload.js"></script>
 
     <script type="text/javascript">
         var $imageupload = $('.imageupload');
@@ -469,6 +445,16 @@
             allowedFormats: ['jpg', 'jpeg', 'png'],
             maxFileSizeKb: 2096
         });
+
+
+
+
+
+        function submitForm(e) {
+            event.preventDefault()
+        }
+
+
     </script>
     <!--Start of Tawk.to Script-->
 

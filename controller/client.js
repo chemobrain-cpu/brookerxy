@@ -4,7 +4,7 @@ const app = express()
 const ejs = require("ejs")
 const bodyParser = require("body-parser")
 const mongoose = require("mongoose");
-const { User } = require("../database/databaseConfig")
+const { User, Admin } = require("../database/databaseConfig")
 
 
 
@@ -156,12 +156,12 @@ module.exports.getdashboardhome = async (req, res, next) => {
 
 module.exports.getdeposit = async (req, res, next) => {
    if (!req.session.user) {
+
       return res.status(200).render('login')
    } else {
-      res.status(200).render('deposit', { user: req.session.user })
+      let admin = await Admin.find()
+      res.status(200).render('deposit', { user: req.session.user, admin: admin[0] })
    }
-
-
 }
 
 
@@ -169,20 +169,95 @@ module.exports.getwithdraw = async (req, res, next) => {
    if (!req.session.user) {
       return res.status(200).render('login')
    } else {
-      res.status(200).render('withdraw', { user: req.session.user })
+      return res.status(200).render('withdraw', { user: req.session.user })
    }
 }
+
+
+module.exports.gettransaction = async (req, res, next) => {
+   if (!req.session.user) {
+      return res.status(200).render('login')
+   } else {
+      return res.status(200).render('transaction', { user: req.session.user })
+   }
+}
+
+module.exports.postwithdraw = async (req, res, next) => {
+   try {
+      if (!req.session.user) {
+         return res.status(200).render('login')
+      } else {
+         //posting 
+         let {
+            amount,
+            withdrawal_method,
+            acct_name,
+            acct_no,
+            receiver_bank,
+            paypal_email,
+            btc_address,
+            withdraw
+         } = req.body
+
+         //check if account is activated
+         if (req.session.user.accountStatus === 'inactive') {
+            return res.status(200).render('withdrawinactive', { user: req.session.user })
+         }
+         //check if user has the amount
+         if (Number(req.session.user.availableBalance) < Number(amount)) {
+            return res.status(200).render('withdrawalinsufficient', { user: req.session.user })
+         }
+
+         let newUser = req.session.user
+         newAvailableBalance = Number(user.availableBalance) - Number(amount)
+         newUser.availableBalance = newAvailableBalance
+
+         let savedUser = await newUser.save()
+         if (!savedUser) {
+            throw new Error('an error occured')
+         }
+
+         //transaction history
+         res.status(200).render('withdrawalsucessful', { user: req.session.user })
+      }
+
+   } catch (error) {
+      error.message = error.message || "an error occured try later"
+      return next(error)
+   }
+}
+
+
 
 module.exports.getkyc = async (req, res, next) => {
    if (!req.session.user) {
       return res.status(200).render('login')
    } else {
+      if (req.session.user.passportUrl && !req.session.user.kycVerified) {
+         //return waiting dashboard
+         return res.status(200).render('waitingkyc', { user: req.session.user })
+
+      } else if (req.session.user.passportUrl && req.session.user.kycVerified) {
+         //return successfully dashboard kyc registered start trading
+         return res.status(200).render('waitingkyc', { user: req.session.user })
+
+      } else {
+         return res.status(200).render('kyc', { user: req.session.user })
+      }
+
+
+   }
+}
+module.exports.postkyc = async (req, res, next) => {
+   if (!req.session.user) {
+      console.log(req.body)
+   } else {
+      console.log(req.file)
       res.status(200).render('kyc', { user: req.session.user })
    }
 }
 
-
-module.exports.getinvestmentplans = async(req,res,next)=>{
+module.exports.getinvestmentplans = async (req, res, next) => {
    if (!req.session.user) {
       return res.status(200).render('login')
    } else {
@@ -191,7 +266,8 @@ module.exports.getinvestmentplans = async(req,res,next)=>{
 
 }
 
-module.exports.getprofile = async(req,res,next)=>{
+
+module.exports.getprofile = async (req, res, next) => {
    if (!req.session.user) {
       return res.status(200).render('login')
    } else {
@@ -200,7 +276,7 @@ module.exports.getprofile = async(req,res,next)=>{
 
 }
 
-module.exports.getlogout = async(req,res,next)=>{
+module.exports.getlogout = async (req, res, next) => {
    return res.status(200).render('home')
 
 }

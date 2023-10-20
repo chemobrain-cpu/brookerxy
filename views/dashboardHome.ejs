@@ -235,8 +235,10 @@
                         </style>
                         <center>
                             <div class="profile-pic">PA</div>
-                            <p style="color:white;"><%=user.fullName%><br>
-                                <%=user.email%></p>
+                            <p style="color:white;">
+                                <%=user.fullName%><br>
+                                    <%=user.email%>
+                            </p>
                         </center>
                     </div>
                 </div>
@@ -259,33 +261,10 @@
                             </span>
                         </a>
                     </li>
-                    <li class="">
-                        <a href="/deposit">
-                            <i class="fa fa-bitcoin"></i> <span>Deposit</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-right pull-right"></i>
-                            </span>
-                        </a>
-                    </li>
-                    <li class="">
-                        <a href="">
-                            <i class="cc BTC-alt"></i> <span>Withdrawal</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-right pull-right"></i>
-                            </span>
-                        </a>
-                    </li>
-                    <li class="">
-                        <a href="">
-                            <i class="cc BTC-alt"></i> <span>Transaction Form</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-right pull-right"></i>
-                            </span>
-                        </a>
-                    </li>
                    
+
                     <li class="">
-                        <a href="">
+                        <a href="/profile">
                             <i class="fa fa-user"></i> <span>Profile</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-right pull-right"></i>
@@ -362,7 +341,10 @@
                                             <div class="col-9 col-stats">
                                                 <div class="numbers">
                                                     <p class="card-category">Deposited</p>
-                                                    <h4 class="card-title text-dark"><%=user.currency%> <%=user.deposited%>.00</h4>
+                                                    <h4 class="card-title text-dark">
+                                                        <%=user.currency%>
+                                                            <%=user.deposited%>.00
+                                                    </h4>
 
                                                 </div>
                                             </div>
@@ -383,7 +365,10 @@
                                             <div class="col-9 col-stats">
                                                 <div class="numbers">
                                                     <p class="card-category">Profit</p>
-                                                    <h4 class="card-title text-dark"><%=user.currency%> <%=user.profit%>.00</h4>
+                                                    <h4 class="card-title text-dark">
+                                                        <%=user.currency%>
+                                                            <%=user.profit%>.00
+                                                    </h4>
                                                 </div>
                                             </div>
                                         </div>
@@ -406,7 +391,10 @@
                                             <div class="col-9 col-stats">
                                                 <div class="numbers">
                                                     <p class="card-category">Available Balance</p>
-                                                    <h4 class="card-title text-danger"><%=user.currency%> <%=user.availableBalance%>.00</h4>
+                                                    <h4 class="card-title text-danger">
+                                                        <%=user.currency%>
+                                                            <%=user.availableBalance%>.00
+                                                    </h4>
                                                 </div>
                                             </div>
                                         </div>
@@ -452,7 +440,9 @@
                                                 <div class="numbers">
                                                     <p class="card-category">Current Plan</p>
                                                     <h4 class="card-title text-dark"> <strong>
-                                                            <label class="label label-warning"><%=user.curentPlan%></label> </strong>
+                                                            <label class="label label-warning">
+                                                                <%=user.curentPlan%>
+                                                            </label> </strong>
                                                     </h4>
                                                 </div>
                                             </div>
@@ -480,7 +470,8 @@
                                                         <div class="progress-bar progress-bar-success"
                                                             role="progressbar" aria-valuenow="0" aria-valuemin="0"
                                                             aria-valuemax="100" style="width: 0%;">
-                                                            <%=user.tradeProgress%> % of trade. </div>
+                                                            <%=user.tradeProgress%> % of trade.
+                                                        </div>
                                                     </div>
 
                                                 </div>

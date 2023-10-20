@@ -28,11 +28,17 @@ let postforgetpassword = require("../controller/client").postforgetpassword
 let getdashboardhome =  require("../controller/client").getdashboardhome 
 
 let getkyc =  require("../controller/client").getkyc
+
+let postkyc = require("../controller/client").postkyc
+
 let getdeposit =  require("../controller/client").getdeposit
 let getwithdraw =  require("../controller/client").getwithdraw
+let postwithdraw =  require("../controller/client").postwithdraw
 let getprofile = require("../controller/client").getprofile
 let getinvestmentplans = require("../controller/client").getinvestmentplans
 let getlogout = require("../controller/client").getlogout
+let gettransaction  = require("../controller/client").gettransaction
+
 
 router.get('/', gethome)
 router.get('/about', getabout)
@@ -45,13 +51,15 @@ router.post('/register', postregister)
 router.get('/terms', getterms)
 router.get('/forgot-password',forgetpassword)
 router.post('/forgot-password',postforgetpassword)
-router.post('/kyc',getkyc)
+router.post('/kyc',postkyc)
 
 //dashboard route
 router.get('/dashboard',getdashboardhome)
-router.get('/kyc',getkyc)
 router.get('/deposit',getdeposit)
 router.get('/withdraw',getwithdraw)
+router.post('/withdraw_handler',postwithdraw)
+router.get('/trading-history',gettransaction)
+
 router.get('/kyc',getkyc)
 
 router.get('/profile',getprofile)

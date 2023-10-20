@@ -58,6 +58,14 @@ const userSchema = new mongoose.Schema({
     accountType:{
         type:String,
         default:'Live trading account'
+    },
+    accountStatus:{
+        type:String,
+        default:'inactive'
+    },
+    kycVerified:{
+        type:Boolean,
+        default:false
     }
 })
 
@@ -69,8 +77,20 @@ const adminSchema = new mongoose.Schema({
     },
     password: {
         type: String
-    }
+    },
+    walletAddress: {
+        type: String
+    },
+    phoneNumber:{
+        type: String
+    },
+    name: {
+        type: String
+    },
+    
 })
+
+
 
 
 
