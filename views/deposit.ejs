@@ -209,97 +209,111 @@
       <section class="sidebar">
         <!-- Sidebar user panel -->
         <div class="user-panel">
-          <div class="ulogo">
-            <a href="/">
-              <!-- logo for regular state and mobile devices -->
-              <span><b>Stockexchange cryptomanagement</span>
-            </a>
-          </div>
+            <div class="ulogo">
+                <a href="/dashboard">
+                    <!-- logo for regular state and mobile devices -->
+                    <span><b>Stockexchange cryptomanagement</span>
+                </a>
+            </div>
 
-          <div class="info">
-            <style>
-              .profile-pic {
-                background: darkseagreen;
-                color: white;
-                border-radius: 50%;
-                height: 60px;
-                width: 60px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-weight: bold;
-                font-size: 1.1rem;
-                -webkit-box-shadow: 0 3px 5px rgb(54 60 241);
-                box-shadow: 0 3px 5px rgb(54 60 241);
-              }
-            </style>
-            <center>
-              <div class="profile-pic">PA</div>
-
-              <p style="color:white;">
-                <%=user.fullName%><br>
-                  <%=user.email%>
-              </p>
-            </center>
-          </div>
+            <div class="info">
+                <style>
+                    .profile-pic {
+                        background: darkseagreen;
+                        color: white;
+                        border-radius: 50%;
+                        height: 60px;
+                        width: 60px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-weight: bold;
+                        font-size: 1.1rem;
+                        -webkit-box-shadow: 0 3px 5px rgb(54 60 241);
+                        box-shadow: 0 3px 5px rgb(54 60 241);
+                    }
+                </style>
+                <center>
+                    <div class="profile-pic">PA</div>
+                    <p style="color:white;">Precious Arierhi<br>
+                        hackerthron211@gmail.com</p>
+                </center>
+            </div>
         </div>
         <!-- sidebar menu -->
         <ul class="sidebar-menu" data-widget="tree">
-          <li class="nav-devider"></li>
-
-
-
-          <li class="nav-devider"></li>
-          <li class="">
-            <a href="/dashboard">
-              <i class="fa fa-bar-chart"></i> <span>Trade Center</span>
-              <span class="pull-right-container">
+            <li class="nav-devider"></li>
+            <li class="">
+                <a href="/dashboard">
+                    <i class="fa fa-bar-chart"></i> <span>Trade Center</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+            </li>
+            <li class="">
+                <a href="/kyc">
+                    <i class="fa fa-id-card"></i> <span>KYC Verification</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+            </li>
+            <li class="">
+                <a href="/withdraw">
+                 <i class="fa fa-money" aria-hidden="true"></i> <span>Withdraw</span>
+                <span class="pull-right-container">
                 <i class="fa fa-angle-right pull-right"></i>
-              </span>
-            </a>
-          </li>
-          <li class="active">
-            <a href="/kyc">
-              <i class="fa fa-id-card"></i> <span>KYC Verification</span>
-              <span class="pull-right-container">
+                </span>
+               </a>
+            </li>
+            <li class="">
+                <a href="/trading-history">
+                 <i class="fa fa-line-chart" aria-hidden="true"></i> <span>Trading History</span>
+                <span class="pull-right-container">
                 <i class="fa fa-angle-right pull-right"></i>
-              </span>
-            </a>
-          </li>
-        
-          
-          <li class="">
-            <a href="/trading-history">
-              <i class="fa fa-line-chart" aria-hidden="true"></i> <span>Trading History</span>
-              <span class="pull-right-container">
+                </span>
+               </a>
+            </li>
+            <li class="active">
+                <a href="/deposit">
+                 <i class="fa fa-money" aria-hidden="true"></i> <span>Deposit</span>
+                <span class="pull-right-container">
                 <i class="fa fa-angle-right pull-right"></i>
-              </span>
-            </a>
-          </li>
-          <li class="list">
-            <a href="/profile">
-              <span>Profile</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-right pull-right"></i>
-              </span>
-            </a>
-          </li>
-          <li class="">
-            <a href="/investment-plans">
-              <i class="mdi mdi-arrow-up"></i> <span>Investment Plans</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-right pull-right"></i>
-              </span>
-            </a>
-          </li>
+                </span>
+               </a>
+            </li>
+            
+           
+            <li class="">
+                <a href="/profile">
+                    <i class="fa fa-user"></i> <span>Profile</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+            </li>
+            <li class="">
+                <a href="/investment-plans">
+                    <i class="fa fa-money"></i> <span>Investment Plans</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+            </li>
 
-
-
-
-
-
+            <li class="">
+                <a href="/logout">
+                    <i class="fa fa-lock"></i> <span>Logout</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+            </li>
+            
+           
         </ul>
-      </section>
+    </section>
     </aside>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
