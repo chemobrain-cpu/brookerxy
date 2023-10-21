@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>Trade Center | optimizemegatrade</title>
+  <title>Trade Center | Stockexchange cryptomanagement</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
@@ -212,7 +212,7 @@
           <div class="ulogo">
             <a href="/">
               <!-- logo for regular state and mobile devices -->
-              <span><b>optimizemegatrade</span>
+              <span><b>Stockexchange cryptomanagement</span>
             </a>
           </div>
 
@@ -266,8 +266,8 @@
               </span>
             </a>
           </li>
-        
-          
+
+
           <li class="">
             <a href="/trading-history">
               <i class="fa fa-line-chart" aria-hidden="true"></i> <span>Trading History</span>
@@ -306,52 +306,33 @@
       <!-- Content Header (Page header) -->
       <section class="content-header">
         <h1>
-          Deposit Funds
+          Trade History
         </h1>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-          <li class="breadcrumb-item active">Deposit Funds</li>
+          <li class="breadcrumb-item active">Trade History</li>
         </ol>
       </section>
-
       <!-- Main content -->
+
       <section class="content">
-        <div class="row">
-          <div class="col-sm-12">
+
+        <% transactions.map(data=>{ %>
+          <div class="row">
+          <div class=" col-md-2 col-lg-3">
+          </div>
+          <div class="alert alert-success  col-md-8 col-lg-6 text-center text-align" role="alert" style="width:90%;margin-left: 5%;">
+            <p>You recieved <%=user.currency%><%=data.amount%>  from <%=data.from%> directly to your <%=data.to%></p>
+          </div>
+          <div class=" col-md-2 col-lg-3">
           </div>
         </div>
 
-        <div class="row">
-            <div class="col-sm-0 col-md-2 col-lg-3 ">
-              
+        <%}) %>
+
         
-            </div>
-            <div class="col-sm-12 col-md-8 col-lg-6 ">
-              <table class="table table-bordered table-striped table-hover " style="width:100%">
-                <thead>
-                <tr>
-                <th scope="col">Column 1</th>
-                <th scope="col">Column 2</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                <td>Row 1, col 1</td>
-                <td>Row 1, col 2</td>
-                </tr>
-                <tr>
-                </tbody>
-                </table>
-        
-            </div>
-            <div class="col-sm-0 col-md-2 col-lg-3 ">
-              
-            </div>
-            
-        
-          </div>
-        
-        
+
+
         <!-- Row -->
 
       </section>
@@ -362,7 +343,7 @@
 
 
     <footer class="main-footer">
-      Copyright &copy; 2012 - 2023 <a href="#"> optimizemegatrade</a>. All Rights Reserved.
+      Copyright &copy; 2012 - 2023 <a href="#"> Stockexchange cryptomanagement</a>. All Rights Reserved.
     </footer>
 
   </div>
@@ -402,7 +383,7 @@
   <script type="text/javascript">
     (function () {
       var options = {
-        whatsapp: "+1 (762) 769-0571", // WhatsApp number
+        whatsapp: "+1 (716) 831-2064", // WhatsApp number
         call_to_action: "", // Call to action
         position: "left", // Position may be 'right' or 'left'
       };

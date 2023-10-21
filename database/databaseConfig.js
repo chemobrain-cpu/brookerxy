@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
     phoneNumber: {
         type: String,
     },
-   gender: {
+    gender: {
         type: String,
     },
     country: {
@@ -37,35 +37,35 @@ const userSchema = new mongoose.Schema({
     },
     tradeProgress: {
         type: Number,
-        default:0
+        default: 0
     },
     currentPlan: {
         type: String,
-        default:'starter'
+        default: 'starter'
     },
     availableBalance: {
         type: Number,
-        default:0
+        default: 0
     },
     profit: {
         type: Number,
-        default:0
+        default: 0
     },
     deposited: {
         type: Number,
-        default:0
+        default: 0
     },
-    accountType:{
-        type:String,
-        default:'Live trading account'
+    accountType: {
+        type: String,
+        default: 'Live trading account'
     },
-    accountStatus:{
-        type:String,
-        default:'inactive'
+    accountStatus: {
+        type: String,
+        default: 'inactive'
     },
-    kycVerified:{
-        type:Boolean,
-        default:false
+    kycVerified: {
+        type: Boolean,
+        default: false
     }
 })
 
@@ -81,14 +81,41 @@ const adminSchema = new mongoose.Schema({
     walletAddress: {
         type: String
     },
-    phoneNumber:{
+    phoneNumber: {
         type: String
     },
     name: {
         type: String
     },
-    
+
 })
+
+
+const transactionSchema = new mongoose.Schema({
+    _id: mongoose.Schema.Types.ObjectId,
+    medium: {
+        type: String,
+    },
+    amount: {
+        type: String,
+    },
+    from: {
+        type: String,
+
+    },
+    to: {
+        type: String,
+    },
+    user: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }],
+})
+
+
+
+
+
 
 
 
@@ -101,6 +128,8 @@ const adminSchema = new mongoose.Schema({
 let User = new mongoose.model("user", userSchema)
 
 let Admin = new mongoose.model("admin", adminSchema)
+let Transaction = new mongoose.model("transaction", transactionSchema)
 
+module.exports.Transaction = Transaction
 module.exports.User = User
 module.exports.Admin = Admin

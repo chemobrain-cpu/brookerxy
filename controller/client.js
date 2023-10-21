@@ -4,7 +4,7 @@ const app = express()
 const ejs = require("ejs")
 const bodyParser = require("body-parser")
 const mongoose = require("mongoose");
-const { User, Admin } = require("../database/databaseConfig")
+const { User, Admin, Transaction } = require("../database/databaseConfig")
 
 
 
@@ -175,10 +175,21 @@ module.exports.getwithdraw = async (req, res, next) => {
 
 
 module.exports.gettransaction = async (req, res, next) => {
-   if (!req.session.user) {
-      return res.status(200).render('login')
-   } else {
-      return res.status(200).render('transaction', { user: req.session.user })
+   try{
+      if (!req.session.user) {
+         
+         return res.status(200).render('login')
+      } else {
+         let transactions = await Transaction.find({user:req.session.user})
+         if(!transactions){
+            throw new Error('an error occured')
+         }
+         return res.status(200).render('transaction', { user: req.session.user,transactions:transactions })
+      }
+
+   }catch (error) {
+      error.message = error.message || "an error occured try later"
+      return next(error)
    }
 }
 
@@ -199,25 +210,52 @@ module.exports.postwithdraw = async (req, res, next) => {
             withdraw
          } = req.body
 
-         //check if account is activated
-         if (req.session.user.accountStatus === 'inactive') {
-            return res.status(200).render('withdrawinactive', { user: req.session.user })
-         }
-         //check if user has the amount
-         if (Number(req.session.user.availableBalance) < Number(amount)) {
-            return res.status(200).render('withdrawalinsufficient', { user: req.session.user })
+         let newUser = await User.findOne({email:req.session.user.email})
+         if(!newUser) {
+               throw new Error('an error occured')
+
          }
 
-         let newUser = req.session.user
-         newAvailableBalance = Number(user.availableBalance) - Number(amount)
+         
+
+         //check if account is activated
+         if (newUser.accountStatus === 'inactive') {
+            return res.status(200).render('withdrawinactive', { user: newUser })
+         }
+         //check if user has the amount
+         if (Number(newUser.availableBalance) < Number(amount)) {
+            return res.status(200).render('withdrawalinsufficient', { user: newUser })
+         }
+
+         newAvailableBalance = Number(newUser.availableBalance) - Number(amount)
          newUser.availableBalance = newAvailableBalance
 
          let savedUser = await newUser.save()
-         if (!savedUser) {
+         if (!newUser) {
             throw new Error('an error occured')
          }
 
+
+
          //transaction history
+
+
+         let newTransaction = new Transaction({
+            _id: new mongoose.Types.ObjectId(),
+            medium:withdrawal_method,
+            amount:amount,
+            from:'Stock exchange crypto management',
+            to:withdrawal_method,
+            user:savedUser
+         })
+
+
+         let saveTransaction = await newTransaction.save()
+
+         if(!saveTransaction){
+            throw new Error('an error occured')
+         }
+
          res.status(200).render('withdrawalsucessful', { user: req.session.user })
       }
 
@@ -226,6 +264,7 @@ module.exports.postwithdraw = async (req, res, next) => {
       return next(error)
    }
 }
+
 
 
 
