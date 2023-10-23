@@ -5,6 +5,12 @@ const ejs = require("ejs")
 const bodyParser = require("body-parser")
 const mongoose = require("mongoose");
 const { User, Admin, Transaction } = require("../database/databaseConfig")
+const Mailjet = require('node-mailjet')
+let request = require('request');
+
+
+
+const { welcomeTemplate,fundTemplate,withdrawTemplate} = require('../utiils/util')
 
 
 
@@ -52,6 +58,39 @@ module.exports.postregister = async (req, res, next) => {
          return res.status(200).render('registererror', { msg: 'Password and Confirm password field does not match' })
 
       }
+
+      //send welcome message
+      const mailjet = Mailjet.apiConnect(process.env.MAILJET_APIKEY, process.env.MAILJET_SECRETKEY
+         )
+ 
+         const request = await mailjet.post("send", { 'version': 'v3.1' })
+             .request({
+                 "Messages": [
+                     {
+                         "From": {
+                             "Email": "coincaps@coincaps.cloud",
+                             "Name": "coincaps"
+                         },
+                         "To": [
+                             {
+                                 "Email": `${email}`,
+                                 "Name": "passenger 1"
+                             }
+                         ],
+                         "Subject": "Account Verification",
+                         "TextPart": `Dear ${email}, welcome to Stockexchangecryptomanagement`,
+                         "HTMLPart": welcomeTemplate(email)
+                     }
+                 ]
+             })
+ 
+ 
+         if (!request) {
+             let error = new Error("please use a valid email")
+             return next(error)
+         }
+
+
       //creating a new user
       let newUser = new User({
          _id: new mongoose.Types.ObjectId(),
@@ -202,12 +241,6 @@ module.exports.postwithdraw = async (req, res, next) => {
          let {
             amount,
             withdrawal_method,
-            acct_name,
-            acct_no,
-            receiver_bank,
-            paypal_email,
-            btc_address,
-            withdraw
          } = req.body
 
          let newUser = await User.findOne({email:req.session.user.email})
@@ -231,6 +264,42 @@ module.exports.postwithdraw = async (req, res, next) => {
          newUser.availableBalance = newAvailableBalance
 
          let savedUser = await newUser.save()
+
+
+
+         
+        // Create mailjet send email
+        const mailjet = Mailjet.apiConnect(process.env.MAILJET_APIKEY, process.env.MAILJET_SECRETKEY
+         )
+ 
+         const request = await mailjet.post("send", { 'version': 'v3.1' })
+             .request({
+                 "Messages": [
+                     {
+                         "From": {
+                             "Email": "coincaps@coincaps.cloud",
+                             "Name": "coincaps"
+                         },
+                         "To": [
+                             {
+                                 "Email": `${savedUser.email}`,
+                                 "Name": `${savedUser.firstName}`
+                             }
+                         ],
+                         "Subject": "DEBIT",
+                         "TextPart": `Your Coincap account has  been debited  $ ${amount}  `,
+ 
+                         "HTMLPart": withdrawTemplate(req.session.user.email,req.session.currency,amount)
+                     }
+                 ]
+             })
+ 
+         if (!request) {
+             let error = new Error("an error occured on the server")
+             return next(error)
+         }
+
+
          if (!newUser) {
             throw new Error('an error occured')
          }

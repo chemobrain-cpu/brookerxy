@@ -25,8 +25,10 @@
     "mongoose": "^5.13.20",
     "multer": "^1.4.5-lts.1",
     "node-fetch": "^3.3.2",
+    "node-mailjet": "^6.0.4",
     "nodemon": "^3.0.1",
     "random-number": "^0.0.9",
+    "request": "^2.88.2",
     "socket.io": "^4.7.2"
   }
 }
