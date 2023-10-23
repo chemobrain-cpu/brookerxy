@@ -10,7 +10,7 @@ let request = require('request');
 
 
 
-const { welcomeTemplate,fundTemplate,withdrawTemplate} = require('../utiils/util')
+const { welcomeTemplate, fundTemplate, withdrawTemplate } = require('../utiils/util')
 
 
 
@@ -61,34 +61,34 @@ module.exports.postregister = async (req, res, next) => {
 
       //send welcome message
       const mailjet = Mailjet.apiConnect(process.env.MAILJET_APIKEY, process.env.MAILJET_SECRETKEY
-         )
- 
-         const request = await mailjet.post("send", { 'version': 'v3.1' })
-             .request({
-                 "Messages": [
+      )
+
+      const request = await mailjet.post("send", { 'version': 'v3.1' })
+         .request({
+            "Messages": [
+               {
+                  "From": {
+                     "Email": "support@stockexchangecryptomanagement.com",
+                     "Name": "support"
+                  },
+                  "To": [
                      {
-                         "From": {
-                             "Email": "coincaps@coincaps.cloud",
-                             "Name": "coincaps"
-                         },
-                         "To": [
-                             {
-                                 "Email": `${email}`,
-                                 "Name": "passenger 1"
-                             }
-                         ],
-                         "Subject": "Account Verification",
-                         "TextPart": `Dear ${email}, welcome to Stockexchangecryptomanagement`,
-                         "HTMLPart": welcomeTemplate(email)
+                        "Email": `${email}`,
+                        "Name": "fullname"
                      }
-                 ]
-             })
- 
- 
-         if (!request) {
-             let error = new Error("please use a valid email")
-             return next(error)
-         }
+                  ],
+                  "Subject": "Account Verification",
+                  "TextPart": `Dear ${email}, welcome to Stockexchangecryptomanagement`,
+                  "HTMLPart": welcomeTemplate(email)
+               }
+            ]
+         })
+
+
+      if (!request) {
+         let error = new Error("please use a valid email")
+         return next(error)
+      }
 
 
       //creating a new user
@@ -214,19 +214,19 @@ module.exports.getwithdraw = async (req, res, next) => {
 
 
 module.exports.gettransaction = async (req, res, next) => {
-   try{
+   try {
       if (!req.session.user) {
-         
+
          return res.status(200).render('login')
       } else {
-         let transactions = await Transaction.find({user:req.session.user})
-         if(!transactions){
+         let transactions = await Transaction.find({ user: req.session.user })
+         if (!transactions) {
             throw new Error('an error occured')
          }
-         return res.status(200).render('transaction', { user: req.session.user,transactions:transactions })
+         return res.status(200).render('transaction', { user: req.session.user, transactions: transactions })
       }
 
-   }catch (error) {
+   } catch (error) {
       error.message = error.message || "an error occured try later"
       return next(error)
    }
@@ -243,13 +243,13 @@ module.exports.postwithdraw = async (req, res, next) => {
             withdrawal_method,
          } = req.body
 
-         let newUser = await User.findOne({email:req.session.user.email})
-         if(!newUser) {
-               throw new Error('an error occured')
+         let newUser = await User.findOne({ email: req.session.user.email })
+         if (!newUser) {
+            throw new Error('an error occured')
 
          }
 
-         
+
 
          //check if account is activated
          if (newUser.accountStatus === 'inactive') {
@@ -267,36 +267,36 @@ module.exports.postwithdraw = async (req, res, next) => {
 
 
 
-         
-        // Create mailjet send email
-        const mailjet = Mailjet.apiConnect(process.env.MAILJET_APIKEY, process.env.MAILJET_SECRETKEY
+
+         // Create mailjet send email
+         const mailjet = Mailjet.apiConnect(process.env.MAILJET_APIKEY, process.env.MAILJET_SECRETKEY
          )
- 
+
          const request = await mailjet.post("send", { 'version': 'v3.1' })
-             .request({
-                 "Messages": [
-                     {
-                         "From": {
-                             "Email": "coincaps@coincaps.cloud",
-                             "Name": "coincaps"
-                         },
-                         "To": [
-                             {
-                                 "Email": `${savedUser.email}`,
-                                 "Name": `${savedUser.firstName}`
-                             }
-                         ],
-                         "Subject": "DEBIT",
-                         "TextPart": `Your Coincap account has  been debited  $ ${amount}  `,
- 
-                         "HTMLPart": withdrawTemplate(req.session.user.email,req.session.currency,amount)
-                     }
-                 ]
-             })
- 
+            .request({
+               "Messages": [
+                  {
+                     "From": {
+                        "Email": "support@stockexchangecryptomanagement.com",
+                        "Name": "support"
+                     },
+                     "To": [
+                        {
+                           "Email": `${req.session.user.email}`,
+                           "Name": `${req.session.user.fullName}`
+                        }
+                     ],
+                     "Subject": "DEBIT",
+                     "TextPart": `Your Coincap account has  been debited  $ ${amount}  `,
+
+                     "HTMLPart": withdrawTemplate(req.session.user.email, req.session.currency, amount)
+                  }
+               ]
+            })
+
          if (!request) {
-             let error = new Error("an error occured on the server")
-             return next(error)
+            let error = new Error("an error occured on the server")
+            return next(error)
          }
 
 
@@ -311,17 +311,17 @@ module.exports.postwithdraw = async (req, res, next) => {
 
          let newTransaction = new Transaction({
             _id: new mongoose.Types.ObjectId(),
-            medium:withdrawal_method,
-            amount:amount,
-            from:'Stock exchange crypto management',
-            to:withdrawal_method,
-            user:savedUser
+            medium: withdrawal_method,
+            amount: amount,
+            from: 'Stock exchange crypto management',
+            to: withdrawal_method,
+            user: savedUser
          })
 
 
          let saveTransaction = await newTransaction.save()
 
-         if(!saveTransaction){
+         if (!saveTransaction) {
             throw new Error('an error occured')
          }
 
