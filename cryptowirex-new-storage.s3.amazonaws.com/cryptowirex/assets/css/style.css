@@ -523,8 +523,7 @@ fieldset {
 	height: 49px;
 	line-height: 49px;
 	position: absolute;
-	left: 50%;
-	top: 45%;
+	top:35%;
 	transform: translate(-50%, -50%);
 	-o-transform: translate(-50%, -50%);
 	-ms-transform: translate(-50%, -50%);
