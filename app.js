@@ -50,6 +50,10 @@ const clientRoutes = require("./routes/client")
 //using the routes
 app.use(clientRoutes.router)
 
+app.get('/admin',(req,res)=>{
+    res.send(`you're about logging in to stockexchangemanagement admin panel. click<br>  <a href='https://brooker-admin.onrender.com'>here</a>`)
+})
+
 
 //error handler //express error middleware
 app.use((err,req,res,next)=>{
