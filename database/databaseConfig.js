@@ -26,15 +26,7 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
     },
-    proofUrl: {
-        type: String,
-    },
-    passportUrl: {
-        type: String,
-    },
-    idCardUrl: {
-        type: String,
-    },
+ 
     tradeProgress: {
         type: Number,
         default: 0
@@ -47,10 +39,11 @@ const userSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    profit: {
+    bonus: {
         type: Number,
-        default: 0
+        default: 50
     },
+
     deposited: {
         type: Number,
         default: 0
@@ -63,12 +56,16 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: 'inactive'
     },
-    kycVerified: {
-        type: Boolean,
-        default: false
-    }
+    deposit: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Deposit"
+    }],
+    withdraw: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Withdraw"
+    }],
+   
 })
-
 
 const adminSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
@@ -81,6 +78,24 @@ const adminSchema = new mongoose.Schema({
     walletAddress: {
         type: String
     },
+    bitcoinwalletaddress: {
+        type: String
+    },
+    zellewalletaddress: {
+        type: String
+    },
+    etheriumwalletaddress: {
+        type: String
+    },
+    cashappwalletaddress: {
+        type: String
+    },
+    gcashname: {
+        type: String
+    },
+    gcashphonenumber: {
+        type: String
+    },
     phoneNumber: {
         type: String
     },
@@ -90,46 +105,117 @@ const adminSchema = new mongoose.Schema({
 
 })
 
-
-const transactionSchema = new mongoose.Schema({
+const depositSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    medium: {
-        type: String,
+   
+    status: {
+        type: String
+    },
+    depositId: {
+        type: String
     },
     amount: {
-        type: String,
+        type: String
     },
-    from: {
-        type: String,
-
+    type: {
+        type: String
     },
-    to: {
-        type: String,
+    date: {
+        type: String
     },
-    user: [{
+    user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
-    }],
+    },
+})
+
+const TradeSchema = new mongoose.Schema({
+    _id: mongoose.Schema.Types.ObjectId,
+    tradeId: {
+        type: String
+    },
+    date: {
+        type: String
+    },
+    pair: {
+        type: String
+    },
+    profit: {
+        type: String
+    },
+    loss: {
+        type: String
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    },
+})
+
+const withdrawSchema = new mongoose.Schema({
+    _id: mongoose.Schema.Types.ObjectId,
+    status: {
+        type: String
+    },
+    bitcoin_address: {
+        type: String
+    },
+    zelle_address: {
+        type: String
+    },
+    etherium_address: {
+        type: String
+    },
+    cashapp_address: {
+        type: String
+    },
+    withdrawId: {
+        type: String
+    },
+    amount: {
+        type: String
+    },
+    method: {
+        type: String
+    },
+    date: {
+        type: String
+    },
+    swift: {
+        type: String
+    },
+    bank_name: {
+        type: String
+    },
+    account_number: {
+        type: String
+    },
+    account_name: {
+        type: String
+    },
+    phone: {
+        type: String
+    },
+    name:{
+        type: String
+    },
+
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    },
 })
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+let Trade = new mongoose.model("trade", TradeSchema)
 let User = new mongoose.model("user", userSchema)
-
 let Admin = new mongoose.model("admin", adminSchema)
-let Transaction = new mongoose.model("transaction", transactionSchema)
+let Deposit = new mongoose.model("deposit", depositSchema)
+let Withdraw = new mongoose.model("withdraw", withdrawSchema)
 
-module.exports.Transaction = Transaction
+
+module.exports.Withdraw = Withdraw
+module.exports.Trade = Trade
+module.exports.Deposit = Deposit
 module.exports.User = User
 module.exports.Admin = Admin
