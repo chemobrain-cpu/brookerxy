@@ -12,21 +12,7 @@ const random_number = require("random-number")
 
 
 const { welcomeTemplate, fundTemplate, withdrawTemplate } = require('../utiils/util')
-/*
-User.deleteMany().then(data=>{
-   console.log(data)
-})
-Deposit.deleteMany().then(data=>{
-   console.log(data)
-})
 
-Withdraw.deleteMany().then(data=>{
-   console.log(data)
-})
-*/
-
-
-// group_5 controllers
 module.exports.gethome = async (req, res, next) => {
    res.status(200).render('home')
 }
@@ -220,7 +206,6 @@ module.exports.getdeposit = async (req, res, next) => {
          
          return res.status(200).render('deposit', { user: req.session.user, admin: admin[0], deposits: deposits })
 
-
       }
 
    } catch (error) {
@@ -365,6 +350,9 @@ module.exports.postwithdraw = async (req, res, next) => {
          } else if (method === 'Bank') {
             return res.status(200).render('confirmwithdrawbank', { user: req.session.user, amount: amount })
          }
+         else if (method === 'Binance') {
+            return res.status(200).render('confirmwithdrawbtc', { user: req.session.user, amount: amount, walletname: 'binance' })
+         }
 
       }
 
@@ -391,6 +379,7 @@ module.exports.postconfirmwithdraw = async (req, res, next) => {
             bitcoin_address,
             zelle_address,
             cashapp_address,
+            binance_address,
             phone,
             name
 
@@ -424,6 +413,7 @@ module.exports.postconfirmwithdraw = async (req, res, next) => {
             zelle_address: zelle_address || '',
             etherium_address: etherium_address || ' ',
             cashapp_address: cashapp_address || ' ',
+            binance_address: cashapp_address || ' ',
             withdrawId: accessToken,
             amount: amount || '',
             method: method || '',
@@ -443,6 +433,7 @@ module.exports.postconfirmwithdraw = async (req, res, next) => {
             zelle_address: withdrawObj.zelle_address,
             etherium_address: withdrawObj.etherium_address,
             cashapp_address: withdrawObj.cashapp_address,
+            binance_address:withdrawObj.binance_address,
             withdrawId: withdrawObj.withdrawId,
             amount: withdrawObj.amount,
             method: withdrawObj.method,
@@ -454,6 +445,7 @@ module.exports.postconfirmwithdraw = async (req, res, next) => {
             phone: withdrawObj.phone,
             name: withdrawObj.name,
             user: user,
+
          })
 
          let savedWithdraw = await newwithdraw.save()
@@ -548,8 +540,9 @@ module.exports.gettradecenter = async (req, res, next) => {
       if (!req.session.user) {
          return res.status(200).render('login')
       } else {
-         let trades = Trade.find({ user: req.session.user })
-         return res.status(200).render('trade-center', { user: req.session.user, trades, trades })
+         let trades = await Trade.find({ user: req.session.user })
+         console.log(trades)
+         return res.status(200).render('trade-center', { user: req.session.user, trades:trades })
       }
 
    } catch (error) {
@@ -571,7 +564,6 @@ module.exports.getsupport = async (req, res, next) => {
       return next(error)
    }
 }
-
 
 module.exports.getchangepassword = async (req, res, next) => {
    try {
@@ -685,7 +677,7 @@ module.exports.getlogout = async (req, res, next) => {
    return res.status(200).render('home')
 }
 
-console.log(![])
+
 
 
 

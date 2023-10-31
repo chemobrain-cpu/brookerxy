@@ -64,6 +64,10 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Withdraw"
     }],
+    trade: [{
+        type: mongoose.Types.ObjectId,
+        ref: "Trade"
+    }],
    
 })
 
@@ -164,6 +168,9 @@ const withdrawSchema = new mongoose.Schema({
         type: String
     },
     etherium_address: {
+        type: String
+    },
+    binance_address: {
         type: String
     },
     cashapp_address: {
