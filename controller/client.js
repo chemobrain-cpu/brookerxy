@@ -636,6 +636,8 @@ module.exports.getpayment = async (req, res, next) => {
 
          let walletaddress
 
+         console.log(admin)
+
          if (id === 'BITCOIN') {
             walletaddress = admin[0].bitcoinwalletaddress
             return res.status(200).render('payment', { walletaddress: walletaddress, user: user })
@@ -671,6 +673,9 @@ module.exports.getpayment = async (req, res, next) => {
       return next(error)
    }
 }
+
+
+
 
 
 module.exports.getlogout = async (req, res, next) => {
