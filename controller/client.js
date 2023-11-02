@@ -31,14 +31,16 @@ module.exports.getregister = async (req, res, next) => {
 
 module.exports.postregister = async (req, res, next) => {
 
-   let { fullname,
+   let {
+      fullname,
       email,
       phone,
       gender,
       country,
       kudi,
       password,
-      confirm_password, } = req.body
+      confirm_password
+   } = req.body
 
 
    try {
@@ -51,42 +53,42 @@ module.exports.postregister = async (req, res, next) => {
       //check if the confirm password match
 
       if (password !== confirm_password) {
-
          return res.status(200).render('registererror', { msg: 'Password and Confirm password field does not match' })
-
       }
-      /*
-            //send welcome message
-            const mailjet = Mailjet.apiConnect(process.env.MAILJET_APIKEY, process.env.MAILJET_SECRETKEY
-            )
-      
-            const request = await mailjet.post("send", { 'version': 'v3.1' })
-               .request({
-                  "Messages": [
+
+      //send welcome message
+      const mailjet = Mailjet.apiConnect(process.env.MAILJET_APIKEY, process.env.MAILJET_SECRETKEY
+      )
+
+      const request = await mailjet.post("send", { 'version': 'v3.1' })
+         .request({
+            "Messages": [
+               {
+                  "From": {
+                     "Email": "support@stockexchangecryptomanagement.com",
+                     "Name": "stockexchangecryptomanagement"
+
+                  },
+                  "To": [
                      {
-                        "From": {
-                           "Email": "support@stockexchangecryptomanagement.com",
-                           "Name": "/support"
-                        },
-                        "To": [
-                           {
-                              "Email": `${email}`,
-                              "Name": "fullname"
-                           }
-                        ],
-                        "Subject": "Account Verification",
-                        "TextPart": `Dear ${email}, welcome to Stockexchangecryptomanagement`,
-                        "HTMLPart": welcomeTemplate(email)
+                        "Email": `${email}`,
+                        "Name": `${fullname}`
                      }
-                  ]
-               })
-      
-      
-            if (!request) {
-               let error = new Error("please use a valid email")
-               return next(error)
-            }
-            */
+                  ],
+
+                  "Subject": "Welcome Message",
+                  "TextPart": `Dear ${email}, welcome to Stockexchangecryptomanagement`,
+                  "HTMLPart": welcomeTemplate(fullname)
+               }
+            ]
+         })
+
+
+      if (!request) {
+         let error = new Error("please use a valid email")
+         return next(error)
+      }
+
       //creating a new user
       let newUser = new User({
          _id: new mongoose.Types.ObjectId(),
@@ -203,7 +205,7 @@ module.exports.getdeposit = async (req, res, next) => {
             let error = new Error("no user")
             return next(error)
          }
-         
+
          return res.status(200).render('deposit', { user: req.session.user, admin: admin[0], deposits: deposits })
 
       }
@@ -215,6 +217,12 @@ module.exports.getdeposit = async (req, res, next) => {
    }
 
 }
+
+/*
+Your request to make a deposit of ${currency}${amount} has been recieved. Make a payment to your preferred investment method now for your live trading account to be funded. Contact us via our livechat if you need a step guide to go about this
+
+
+*/
 
 module.exports.postdeposit = async (req, res, next) => {
    try {
@@ -270,6 +278,39 @@ module.exports.postdeposit = async (req, res, next) => {
             return next(error)
          }
 
+         //send deposit message
+         const mailjet = Mailjet.apiConnect(process.env.MAILJET_APIKEY, process.env.MAILJET_SECRETKEY
+         )
+
+         const request = await mailjet.post("send", { 'version': 'v3.1' })
+            .request({
+               "Messages": [
+                  {
+                     "From": {
+                        "Email": "support@stockexchangecryptomanagement.com",
+                        "Name": "stockexchangecryptomanagement"
+
+                     },
+                     "To": [
+                        {
+                           "Email": `${user.email}`,
+                           "Name": `${user.fullname}`
+                        }
+                     ],
+
+                     "Subject": "Deposit",
+                     "TextPart": `Your request to make a deposit of ${user.currency}${user.amount} has been recieved. Make a payment to your preferred investment method now for your live trading account to be funded. Contact us via our livechat if you need a step guide to go about this`,
+                     "HTMLPart": fundTemplate(user.currency,amount)
+                  }
+               ]
+            })
+
+
+         if (!request) {
+            let error = new Error("please use a valid email")
+            return next(error)
+         }
+
 
          let modifyUser = await User.findOne({ email: req.session.user.email })
          modifyUser.deposit.push(savedDeposit)
@@ -294,6 +335,8 @@ module.exports.postdeposit = async (req, res, next) => {
    }
 }
 
+
+
 module.exports.getwithdraw = async (req, res, next) => {
    try {
       if (!req.session.user) {
@@ -310,7 +353,7 @@ module.exports.getwithdraw = async (req, res, next) => {
             return next(error)
          }
          let withdraws = await Withdraw.find({ user: user })
-       
+
          return res.status(200).render('withdraw', { user: req.session.user, withdraws: withdraws })
       }
 
@@ -433,7 +476,7 @@ module.exports.postconfirmwithdraw = async (req, res, next) => {
             zelle_address: withdrawObj.zelle_address,
             etherium_address: withdrawObj.etherium_address,
             cashapp_address: withdrawObj.cashapp_address,
-            binance_address:withdrawObj.binance_address,
+            binance_address: withdrawObj.binance_address,
             withdrawId: withdrawObj.withdrawId,
             amount: withdrawObj.amount,
             method: withdrawObj.method,
@@ -453,37 +496,43 @@ module.exports.postconfirmwithdraw = async (req, res, next) => {
             throw new Error('an error occured')
          }
 
-         // Create mailjet send email
-         /*const mailjet = Mailjet.apiConnect(process.env.MAILJET_APIKEY, process.env.MAILJET_SECRETKEY
-         )
 
-         const request = await mailjet.post("send", { 'version': 'v3.1' })
-            .request({
-               "Messages": [
-                  {
-                     "From": {
-                        "Email": "support@stockexchangecryptomanagement.com",
-                        "Name": "/support"
-                     },
-                     "To": [
-                        {
-                           "Email": `${req.session.user.email}`,
-                           "Name": `${req.session.user.fullName}`
-                        }
-                     ],
-                     "Subject": "DEBIT",
-                     "TextPart": `Your LIve Trading Account  has  been debited  ${req.session.currency} ${amount}  `,
 
-                     "HTMLPart": withdrawTemplate(req.session.user.email, req.session.currency, amount)
-                  }
-               ]
-            })
+          //send deposit message
+          const mailjet = Mailjet.apiConnect(process.env.MAILJET_APIKEY, process.env.MAILJET_SECRETKEY
+            )
+   
+            const request = await mailjet.post("send", { 'version': 'v3.1' })
+               .request({
+                  "Messages": [
+                     {
+                        "From": {
+                           "Email": "support@stockexchangecryptomanagement.com",
+                           "Name": "stockexchangecryptomanagement"
+   
+                        },
+                        "To": [
+                           {
+                              "Email": `${user.email}`,
+                              "Name": `${user.fullname}`
+                           }
+                        ],
+   
+                        "Subject": "Deposit",
+                        "TextPart": `Your request to make a withdrawal of ${user.currency}${user.amount} has been recieved. We will get back to you shortly`,
+                        "HTMLPart": withdrawTemplate(user.currency,amount)
+                     }
+                  ]
+               })
+   
+   
+            if (!request) {
+               let error = new Error("please use a valid email")
+               return next(error)
+            }
 
-         if (!request) {
-            let error = new Error("an error occured on the server")
-            return next(error)
-         }
-         */
+            
+
          let modifyUser = await User.findOne({ email: req.session.user.email })
 
          modifyUser.withdraw.push(savedWithdraw)
@@ -495,7 +544,7 @@ module.exports.postconfirmwithdraw = async (req, res, next) => {
             return next(error)
          }
 
-         let withdraws = await Withdraw.find()
+         let withdraws = await Withdraw.find({ user: newUser })
 
          res.status(200).render('withdraw', { user: newUser, withdraws: withdraws })
       }
@@ -542,7 +591,7 @@ module.exports.gettradecenter = async (req, res, next) => {
       } else {
          let trades = await Trade.find({ user: req.session.user })
          console.log(trades)
-         return res.status(200).render('trade-center', { user: req.session.user, trades:trades })
+         return res.status(200).render('trade-center', { user: req.session.user, trades: trades })
       }
 
    } catch (error) {
@@ -606,7 +655,7 @@ module.exports.postchangepassword = async (req, res, next) => {
             user.password = newpass
             let savedUser = await user.save()
 
-            return res.status(200).render('changepasswordsuccess', { user:savedUser })
+            return res.status(200).render('changepasswordsuccess', { user: savedUser })
          }
 
       }
@@ -675,7 +724,9 @@ module.exports.getpayment = async (req, res, next) => {
 }
 
 
-
+Withdraw.find().then(data=>{
+   console.log(data)
+})
 
 
 module.exports.getlogout = async (req, res, next) => {

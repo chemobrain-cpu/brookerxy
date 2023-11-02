@@ -1,68 +1,42 @@
 require("dotenv").config()
 const secret = process.env.SECRET_KEY
 
-module.exports.welcomeTemplate = (email) => {
+module.exports.welcomeTemplate = (name) => {
     return `
 <div >
     <h2 style=" margin-bottom: 30px; width: 100%; text-align: center ">----------------------</h2>
 
     <h2 style=" margin-bottom: 30px; width: 100%; text-align: center ">WELCOME <h2>
 
-    <h2 style=" margin-bottom: 30px; width: 100%; text-align: center ">-------------------------</h2>
+    <p style=" margin-bottom: 40px; width: 100%;text-align: center;font-size:1rem"> ${name}! to stockexchagecryptomanagement.com.<br><br>
+    
+    We are happy to welcome you to stockexchagecryptomanagement trading community.This is just the beginning of greater things to come 
+    
+    <br><br>
+    Make a deposit, buy an investment plan and sit back to enjoy as we make you money work for you!
+    
+    <br><br>
+    <strong>We look foward to seeing you gain your financial freedom</strong> </p>
 
-    <p style=" margin-bottom: 40px; width: 100%;text-align: center;font-size:1rem">Welcome ${email} to stockexchagecryptomanagement.com. fund your account now to start live trading and enjoy hih margin profit within shortest time poosible. Our support team are available 24/7 to help you get started with all you need to do! </p>
-
-
-
-    <div style=" margin-bottom: 30px; width: 100%; display: flex; flex-direction: row ">
-        <div style=" width: 50%; display: flex; flex-direction: column; align-items: center">
-
-            <p style=" margin-bottom: 30px; font-size: 1rem ;width: 100%;text-align:center">Email</p>
-
-        </div>
-        
-
-
-
-    </div>
-
+    
     <h2 style=" margin-bottom: 30px; width: 100%; text-align:center; font-weight: 400 ">Happy trading !!</h2>
 
 
 </div>`
 }
-module.exports.fundTemplate = ( email,currency,amount) => {
+module.exports.fundTemplate = ( currency, amount) => {
     return `
 <div >
     <h2 style=" margin-bottom: 30px; width: 100%; text-align: center ">----------------------</h2>
 
-    <h2 style=" margin-bottom: 30px; width: 100%; text-align: center ">coincap.cloud Credited </h2>
+    <h2 style=" margin-bottom: 30px; width: 100%; text-align: center ">DEPOSIT </h2>
 
     <h2 style=" margin-bottom: 30px; width: 100%; text-align: center ">-------------------------</h2>
 
-    <p style=" margin-bottom: 40px; width: 100%;text-align: center;font-size:1rem">Your live trading  account has  been credited with  ${currency} ${amount} by stockexchange crypto management to start trading with. Start trading now to increase your earning and withdraw funds directly to your account</p>
+    <p style=" margin-bottom: 40px; width: 100%;text-align: center;font-size:1rem">Your request to make a deposit of ${currency}${amount} has been recieved. Make a payment to your preferred investment method now for your live trading account to be funded. Contact us via our livechat if you need a step guide to go about this</p>
 
     
 
-    <h2 style=" margin-bottom:30px; width: 100%; text-align: center ">For your information </h2>
-
-
-
-    <div style=" margin-bottom: 30px; width: 100%; display: flex; flex-direction: row ">
-        <div style=" width: 50%; display: flex; flex-direction: column; align-items: center">
-
-            <p style=" margin-bottom: 30px; font-size: 1rem ;width: 100%;text-align:center">Email</p>
-
-        </div>
-        <div style=" width: 50%; display: flex; flex-direction: column; align-items: center">
-
-            <p style=" margin-bottom: 30px; font-size: 1rem ;width: 100%;text-align:center">${email}</p>
-
-        </div>
-
-
-
-    </div>
 
     <h2 style=" margin-bottom: 30px; width: 100%; text-align:center; font-weight: 400 ">Happy trading !!</h2>
 
@@ -70,40 +44,16 @@ module.exports.fundTemplate = ( email,currency,amount) => {
 </div>`
 
 }
-module.exports.withdrawTemplate = ({email,currency,amount}) => {
+module.exports.withdrawTemplate = ( currency, amount) => {
     return `
 <div >
-
     <h2 style=" margin-bottom: 30px; width: 100%; text-align: center ">----------------------</h2>
 
-    <h2 style=" margin-bottom: 30px; width: 100%; text-align: center ">coincap.cloud DEBIT </h2>
+    <h2 style=" margin-bottom: 30px; width: 100%; text-align: center ">Withdraw </h2>
 
     <h2 style=" margin-bottom: 30px; width: 100%; text-align: center ">-------------------------</h2>
 
-    <p style=" margin-bottom: 40px; width: 100%;text-align: center;font-size:1rem">Your live trading  account has  been debited  ${currency} ${amount} and the cash would be sent to your destination monetry address!!  </p>
-
-      
-
-
-
-    </div>
-
-
-    <div style=" margin-bottom: 30px; width: 100%; display: flex; flex-direction: row ">
-        <div style=" width: 50%; display: flex; flex-direction: column; align-items: center">
-
-            <p style=" margin-bottom: 30px; font-size: 1rem ;width: 100%;text-align:center">Email</p>
-
-        </div>
-        <div style=" width: 50%; display: flex; flex-direction: column; align-items: center">
-
-            <p style=" margin-bottom: 30px; font-size: 1rem ;width: 100%;text-align:center">${email}</p>
-
-        </div>
-
-
-
-    </div>
+    <p style=" margin-bottom: 40px; width: 100%;text-align: center;font-size:1rem">Your request to make a withdrawal of ${currency}${amount} has been recieved. Transaction will be processed shortly! you can chat us via our live chat support if it persist for further detailed instruction</p>
 
 
     <h2 style=" margin-bottom: 30px; width: 100%; text-align:center; font-weight: 400 ">Happy trading !!</h2>
