@@ -724,9 +724,6 @@ module.exports.getpayment = async (req, res, next) => {
 }
 
 
-Withdraw.find().then(data=>{
-   console.log(data)
-})
 
 
 module.exports.getlogout = async (req, res, next) => {
