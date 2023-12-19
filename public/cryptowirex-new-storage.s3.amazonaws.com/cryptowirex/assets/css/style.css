@@ -515,11 +515,13 @@ fieldset {
 .theme-loader {
 	text-transform: uppercase;
 	font-weight: 700;
-	font-size: 18px;
+	font-size: 14px;
 	color: rgba(26, 247, 37, 0.98);
 	letter-spacing: 0.2em;
-	text-align: center;
-	width: 244px;
+	text-align: left;
+	/*width: 244px;*/
+	width:100%;
+	padding-left: 50px;
 	height: 49px;
 	line-height: 49px;
 	position: absolute;
