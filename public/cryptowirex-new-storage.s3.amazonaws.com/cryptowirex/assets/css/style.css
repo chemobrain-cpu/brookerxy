@@ -515,13 +515,11 @@ fieldset {
 .theme-loader {
 	text-transform: uppercase;
 	font-weight: 700;
-	font-size: 14px;
+	font-size: 12px;
 	color: rgba(26, 247, 37, 0.98);
 	letter-spacing: 0.2em;
-	text-align: left;
-	/*width: 244px;*/
-	width:100%;
-	padding-left: 50px;
+	text-align: center;
+	width: 244px;
 	height: 49px;
 	line-height: 49px;
 	position: absolute;
@@ -533,6 +531,7 @@ fieldset {
 	-webkit-transform: translate(-50%, -50%);
 	-moz-transform: translate(-50%, -50%);
 }
+
 
 .theme-loader::before,
 .theme-loader::after {
@@ -5298,6 +5297,10 @@ span.amount-del {
 	.auto-container {
 		width: 90%;
 	}
+
+	.theme-loader {
+		text-align: left;
+	}
 }
 
 @media only screen and (max-width: 360px) {
@@ -5305,11 +5308,17 @@ span.amount-del {
 	.auto-container {
 		width: 90%;
 	}
+	.theme-loader {
+		text-align: left;
+	}
 }
 
 
 @media only screen and (max-width: 1400px) {
 	.single-counter {
 		overflow-x: scroll;
+	}
+	.theme-loader {
+		text-align: left;
 	}
 }
