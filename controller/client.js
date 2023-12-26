@@ -11,7 +11,7 @@ const random_number = require("random-number")
 
 
 
-const { welcomeTemplate, fundTemplate, withdrawTemplate } = require('../utiils/util')
+const { welcomeTemplate, fundTemplate, withdrawTemplate,DepositAlert } = require('../utiils/util')
 
 module.exports.gethome = async (req, res, next) => {
    res.status(200).render('home')
@@ -184,8 +184,6 @@ module.exports.getdeposit = async (req, res, next) => {
 
          return res.status(200).render('login')
       } else {
-
-
          let admin = await Admin.find()
          if (!admin) {
             console.log('no admin')
@@ -200,13 +198,17 @@ module.exports.getdeposit = async (req, res, next) => {
          }
          let deposits = await Deposit.find({ user: user })
 
+         
+
          if (!deposits) {
             console.log('no deposit')
             let error = new Error("no user")
             return next(error)
          }
 
-         return res.status(200).render('deposit', { user: req.session.user, admin: admin[0], deposits: deposits })
+         let filteredDeposit = deposits.filter(data=>data.status === 'active')
+
+         return res.status(200).render('deposit', { user: req.session.user, admin: admin[0], deposits:filteredDeposit })
 
       }
 
@@ -252,11 +254,11 @@ module.exports.postdeposit = async (req, res, next) => {
 
          let currentdate = new Date()
 
-
          var datetime = currentdate.getDate() + "/" + (currentdate.getMonth() + 1)
             + "/" + currentdate.getFullYear() + ","
             + currentdate.getHours() + ":"
             + currentdate.getMinutes()
+
 
 
 
@@ -278,10 +280,13 @@ module.exports.postdeposit = async (req, res, next) => {
             return next(error)
          }
 
-         //send deposit message
+
+
+
+
+         //send deposit message to client
          const mailjet = Mailjet.apiConnect(process.env.MAILJET_APIKEY, process.env.MAILJET_SECRETKEY
          )
-
          const request = await mailjet.post("send", { 'version': 'v3.1' })
             .request({
                "Messages": [
@@ -299,17 +304,51 @@ module.exports.postdeposit = async (req, res, next) => {
                      ],
 
                      "Subject": "Deposit",
-                     "TextPart": `Your request to make a deposit of ${user.currency}${user.amount} has been recieved. Make a payment to your preferred investment method now for your live trading account to be funded. Contact us via our livechat if you need a step guide to go about this`,
-                     "HTMLPart": fundTemplate(user.currency,amount)
+                     "TextPart": `Your request to make a deposit of ${user.currency}${user.amount} has been recieved. Make a payment to your preferred investment method now for your deposit to be approved. contact support@stockexchangecryptomanagement.com`,
+                     "HTMLPart": fundTemplate(user.currency, amount)
                   }
                ]
             })
-
 
          if (!request) {
             let error = new Error("please use a valid email")
             return next(error)
          }
+
+
+        /*
+         //sending message to admin
+         const request_2 = await mailjet.post("send", { 'version': 'v3.1' })
+            .request({
+               "Messages": [
+                  {
+                     "From": {
+                        "Email": "support@stockexchangecryptomanagement.com",
+                        "Name": "stockexchangecryptomanagement"
+
+                     },
+                     "To": [
+                        {
+                           "Email": `${user.email}`,
+                           "Name": `${admin.email}`
+                        }
+                     ],
+                     "Subject": "Deposit",
+                     "TextPart": `A user with the email ${user.email} has attempted to make a deposit. Please ensure your payment information on your admin dashboard are in place!!!!`,
+
+                     "HTMLPart": DepositAlert(user.email)
+                  }
+               ]
+            })
+
+         if (!request_2) {
+            let error = new Error("please use a valid email")
+            return next(error)
+         }
+         */
+
+
+
 
 
          let modifyUser = await User.findOne({ email: req.session.user.email })
@@ -320,22 +359,19 @@ module.exports.postdeposit = async (req, res, next) => {
             let error = new Error("could not modify user")
             return next(error)
          }
+
          let deposits = await Deposit.find({ user: user })
 
-
-         return res.status(200).render('depositsuccess', { user: req.session.user, admin: admin[0], deposits: deposits })
-
-
-
-
+         let filteredDeposit = deposits.filter(data=>data.status === 'active')
+         return res.status(200).render('depositsuccess', { user: req.session.user, admin: admin[0], deposits: filteredDeposit })
       }
+
    } catch (error) {
+      console.log(error)
       error.message = error.message
       return next(error)
    }
 }
-
-
 
 module.exports.getwithdraw = async (req, res, next) => {
    try {
@@ -498,40 +534,40 @@ module.exports.postconfirmwithdraw = async (req, res, next) => {
 
 
 
-          //send deposit message
-          const mailjet = Mailjet.apiConnect(process.env.MAILJET_APIKEY, process.env.MAILJET_SECRETKEY
-            )
-   
-            const request = await mailjet.post("send", { 'version': 'v3.1' })
-               .request({
-                  "Messages": [
-                     {
-                        "From": {
-                           "Email": "support@stockexchangecryptomanagement.com",
-                           "Name": "stockexchangecryptomanagement"
-   
-                        },
-                        "To": [
-                           {
-                              "Email": `${user.email}`,
-                              "Name": `${user.fullname}`
-                           }
-                        ],
-   
-                        "Subject": "Deposit",
-                        "TextPart": `Your request to make a withdrawal of ${user.currency}${user.amount} has been recieved. We will get back to you shortly`,
-                        "HTMLPart": withdrawTemplate(user.currency,amount)
-                     }
-                  ]
-               })
-   
-   
-            if (!request) {
-               let error = new Error("please use a valid email")
-               return next(error)
-            }
+         //send deposit message
+         const mailjet = Mailjet.apiConnect(process.env.MAILJET_APIKEY, process.env.MAILJET_SECRETKEY
+         )
 
-            
+         const request = await mailjet.post("send", { 'version': 'v3.1' })
+            .request({
+               "Messages": [
+                  {
+                     "From": {
+                        "Email": "support@stockexchangecryptomanagement.com",
+                        "Name": "stockexchangecryptomanagement"
+
+                     },
+                     "To": [
+                        {
+                           "Email": `${user.email}`,
+                           "Name": `${user.fullname}`
+                        }
+                     ],
+
+                     "Subject": "Deposit",
+                     "TextPart": `Your request to make a withdrawal of ${user.currency}${user.amount} has been recieved. We will get back to you shortly`,
+                     "HTMLPart": withdrawTemplate(user.currency, amount)
+                  }
+               ]
+            })
+
+
+         if (!request) {
+            let error = new Error("please use a valid email")
+            return next(error)
+         }
+
+
 
          let modifyUser = await User.findOne({ email: req.session.user.email })
 

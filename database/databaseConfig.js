@@ -1,7 +1,9 @@
 const mongoose = require("mongoose")
 mongoose.connect(process.env.DB_STRING).then(() => {
-    //console.log("connected to database")
+    console.log("connected to database")
 })
+
+
 
 const userSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
@@ -70,6 +72,7 @@ const userSchema = new mongoose.Schema({
     }],
    
 })
+
 
 const adminSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
