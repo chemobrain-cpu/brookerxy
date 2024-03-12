@@ -1,0 +1,2725 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width initial-scale=1.0">
+
+    <title>Dashboard | Stockexchangecryptomanagement</title>
+    <link rel="icon" href="dash2/address_files/favicon.png" type="image/png" sizes="16x16">
+    <!-- GLOBAL MAINLY STYLES-->
+    <link href="dash2/address_files/bootstrap.min.css" rel="stylesheet">
+    <link href="dash2/address_files/font-awesome.min.css" rel="stylesheet">
+    <link href="dash2/address_files/themify-icons.css" rel="stylesheet">
+    <!-- PLUGINS STYLES-->
+    <link href="dash2/address_files/jquery-jvectormap-2.0.3.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- THEME STYLES-->
+    <link href="dash2/address_files/main.css" rel="stylesheet">
+    <!-- PAGE LEVEL STYLES-->
+    <!-- SWEET ALERT -->
+    <script async="" src="dashboard_files/app.js.download" charset="UTF-8" crossorigin="*"></script>
+    <script async="" src="dash2/js/default.js" charset="UTF-8" crossorigin="*"></script>
+    <script src="dashboard_files/sweetalert2%409.html"></script>
+    <style>
+        .swal2-popup.swal2-toast {
+            flex-direction: row;
+            align-items: center;
+            width: auto;
+            padding: .625em;
+            overflow-y: hidden;
+            background: #fff;
+            box-shadow: 0 0 .625em #d9d9d9
+        }
+
+        .swal2-popup.swal2-toast .swal2-header {
+            flex-direction: row;
+            padding: 0
+        }
+
+        .swal2-popup.swal2-toast .swal2-title {
+            flex-grow: 1;
+            justify-content: flex-start;
+            margin: 0 .6em;
+            font-size: 1em
+        }
+
+        .swal2-popup.swal2-toast .swal2-footer {
+            margin: .5em 0 0;
+            padding: .5em 0 0;
+            font-size: .8em
+        }
+
+        .swal2-popup.swal2-toast .swal2-close {
+            position: static;
+            width: .8em;
+            height: .8em;
+            line-height: .8
+        }
+
+        .swal2-popup.swal2-toast .swal2-content {
+            justify-content: flex-start;
+            padding: 0;
+            font-size: 1em
+        }
+
+        .swal2-popup.swal2-toast .swal2-icon {
+            width: 2em;
+            min-width: 2em;
+            height: 2em;
+            margin: 0
+        }
+
+        .swal2-popup.swal2-toast .swal2-icon .swal2-icon-content {
+            display: flex;
+            align-items: center;
+            font-size: 1.8em;
+            font-weight: 700
+        }
+
+        @media all and (-ms-high-contrast:none),
+        (-ms-high-contrast:active) {
+            .swal2-popup.swal2-toast .swal2-icon .swal2-icon-content {
+                font-size: .25em
+            }
+        }
+
+        .swal2-popup.swal2-toast .swal2-icon.swal2-success .swal2-success-ring {
+            width: 2em;
+            height: 2em
+        }
+
+        .swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line] {
+            top: .875em;
+            width: 1.375em
+        }
+
+        .swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left] {
+            left: .3125em
+        }
+
+        .swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right] {
+            right: .3125em
+        }
+
+        .swal2-popup.swal2-toast .swal2-actions {
+            flex-basis: auto !important;
+            width: auto;
+            height: auto;
+            margin: 0 .3125em
+        }
+
+        .swal2-popup.swal2-toast .swal2-styled {
+            margin: 0 .3125em;
+            padding: .3125em .625em;
+            font-size: 1em
+        }
+
+        .swal2-popup.swal2-toast .swal2-styled:focus {
+            box-shadow: 0 0 0 1px #fff, 0 0 0 3px rgba(50, 100, 150, .4)
+        }
+
+        .swal2-popup.swal2-toast .swal2-success {
+            border-color: #a5dc86
+        }
+
+        .swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line] {
+            position: absolute;
+            width: 1.6em;
+            height: 3em;
+            transform: rotate(45deg);
+            border-radius: 50%
+        }
+
+        .swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line][class$=left] {
+            top: -.8em;
+            left: -.5em;
+            transform: rotate(-45deg);
+            transform-origin: 2em 2em;
+            border-radius: 4em 0 0 4em
+        }
+
+        .swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line][class$=right] {
+            top: -.25em;
+            left: .9375em;
+            transform-origin: 0 1.5em;
+            border-radius: 0 4em 4em 0
+        }
+
+        .swal2-popup.swal2-toast .swal2-success .swal2-success-ring {
+            width: 2em;
+            height: 2em
+        }
+
+        .swal2-popup.swal2-toast .swal2-success .swal2-success-fix {
+            top: 0;
+            left: .4375em;
+            width: .4375em;
+            height: 2.6875em
+        }
+
+        .swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line] {
+            height: .3125em
+        }
+
+        .swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line][class$=tip] {
+            top: 1.125em;
+            left: .1875em;
+            width: .75em
+        }
+
+        .swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line][class$=long] {
+            top: .9375em;
+            right: .1875em;
+            width: 1.375em
+        }
+
+        .swal2-popup.swal2-toast .swal2-success.swal2-icon-show .swal2-success-line-tip {
+            -webkit-animation: swal2-toast-animate-success-line-tip .75s;
+            animation: swal2-toast-animate-success-line-tip .75s
+        }
+
+        .swal2-popup.swal2-toast .swal2-success.swal2-icon-show .swal2-success-line-long {
+            -webkit-animation: swal2-toast-animate-success-line-long .75s;
+            animation: swal2-toast-animate-success-line-long .75s
+        }
+
+        .swal2-popup.swal2-toast.swal2-show {
+            -webkit-animation: swal2-toast-show .5s;
+            animation: swal2-toast-show .5s
+        }
+
+        .swal2-popup.swal2-toast.swal2-hide {
+            -webkit-animation: swal2-toast-hide .1s forwards;
+            animation: swal2-toast-hide .1s forwards
+        }
+
+        .swal2-container {
+            display: flex;
+            position: fixed;
+            z-index: 1060;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            padding: .625em;
+            overflow-x: hidden;
+            transition: background-color .1s;
+            -webkit-overflow-scrolling: touch
+        }
+
+        .swal2-container.swal2-backdrop-show,
+        .swal2-container.swal2-noanimation {
+            background: rgba(0, 0, 0, .4)
+        }
+
+        .swal2-container.swal2-backdrop-hide {
+            background: 0 0 !important
+        }
+
+        .swal2-container.swal2-top {
+            align-items: flex-start
+        }
+
+        .swal2-container.swal2-top-left,
+        .swal2-container.swal2-top-start {
+            align-items: flex-start;
+            justify-content: flex-start
+        }
+
+        .swal2-container.swal2-top-end,
+        .swal2-container.swal2-top-right {
+            align-items: flex-start;
+            justify-content: flex-end
+        }
+
+        .swal2-container.swal2-center {
+            align-items: center
+        }
+
+        .swal2-container.swal2-center-left,
+        .swal2-container.swal2-center-start {
+            align-items: center;
+            justify-content: flex-start
+        }
+
+        .swal2-container.swal2-center-end,
+        .swal2-container.swal2-center-right {
+            align-items: center;
+            justify-content: flex-end
+        }
+
+        .swal2-container.swal2-bottom {
+            align-items: flex-end
+        }
+
+        .swal2-container.swal2-bottom-left,
+        .swal2-container.swal2-bottom-start {
+            align-items: flex-end;
+            justify-content: flex-start
+        }
+
+        .swal2-container.swal2-bottom-end,
+        .swal2-container.swal2-bottom-right {
+            align-items: flex-end;
+            justify-content: flex-end
+        }
+
+        .swal2-container.swal2-bottom-end>:first-child,
+        .swal2-container.swal2-bottom-left>:first-child,
+        .swal2-container.swal2-bottom-right>:first-child,
+        .swal2-container.swal2-bottom-start>:first-child,
+        .swal2-container.swal2-bottom>:first-child {
+            margin-top: auto
+        }
+
+        .swal2-container.swal2-grow-fullscreen>.swal2-modal {
+            display: flex !important;
+            flex: 1;
+            align-self: stretch;
+            justify-content: center
+        }
+
+        .swal2-container.swal2-grow-row>.swal2-modal {
+            display: flex !important;
+            flex: 1;
+            align-content: center;
+            justify-content: center
+        }
+
+        .swal2-container.swal2-grow-column {
+            flex: 1;
+            flex-direction: column
+        }
+
+        .swal2-container.swal2-grow-column.swal2-bottom,
+        .swal2-container.swal2-grow-column.swal2-center,
+        .swal2-container.swal2-grow-column.swal2-top {
+            align-items: center
+        }
+
+        .swal2-container.swal2-grow-column.swal2-bottom-left,
+        .swal2-container.swal2-grow-column.swal2-bottom-start,
+        .swal2-container.swal2-grow-column.swal2-center-left,
+        .swal2-container.swal2-grow-column.swal2-center-start,
+        .swal2-container.swal2-grow-column.swal2-top-left,
+        .swal2-container.swal2-grow-column.swal2-top-start {
+            align-items: flex-start
+        }
+
+        .swal2-container.swal2-grow-column.swal2-bottom-end,
+        .swal2-container.swal2-grow-column.swal2-bottom-right,
+        .swal2-container.swal2-grow-column.swal2-center-end,
+        .swal2-container.swal2-grow-column.swal2-center-right,
+        .swal2-container.swal2-grow-column.swal2-top-end,
+        .swal2-container.swal2-grow-column.swal2-top-right {
+            align-items: flex-end
+        }
+
+        .swal2-container.swal2-grow-column>.swal2-modal {
+            display: flex !important;
+            flex: 1;
+            align-content: center;
+            justify-content: center
+        }
+
+        .swal2-container.swal2-no-transition {
+            transition: none !important
+        }
+
+        .swal2-container:not(.swal2-top):not(.swal2-top-start):not(.swal2-top-end):not(.swal2-top-left):not(.swal2-top-right):not(.swal2-center-start):not(.swal2-center-end):not(.swal2-center-left):not(.swal2-center-right):not(.swal2-bottom):not(.swal2-bottom-start):not(.swal2-bottom-end):not(.swal2-bottom-left):not(.swal2-bottom-right):not(.swal2-grow-fullscreen)>.swal2-modal {
+            margin: auto
+        }
+
+        @media all and (-ms-high-contrast:none),
+        (-ms-high-contrast:active) {
+            .swal2-container .swal2-modal {
+                margin: 0 !important
+            }
+        }
+
+        .swal2-popup {
+            display: none;
+            position: relative;
+            box-sizing: border-box;
+            flex-direction: column;
+            justify-content: center;
+            width: 32em;
+            max-width: 100%;
+            padding: 1.25em;
+            border: none;
+            border-radius: .3125em;
+            background: #fff;
+            font-family: inherit;
+            font-size: 1rem
+        }
+
+        .swal2-popup:focus {
+            outline: 0
+        }
+
+        .swal2-popup.swal2-loading {
+            overflow-y: hidden
+        }
+
+        .swal2-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 1.8em
+        }
+
+        .swal2-title {
+            position: relative;
+            max-width: 100%;
+            margin: 0 0 .4em;
+            padding: 0;
+            color: #595959;
+            font-size: 1.875em;
+            font-weight: 600;
+            text-align: center;
+            text-transform: none;
+            word-wrap: break-word
+        }
+
+        .swal2-actions {
+            display: flex;
+            z-index: 1;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin: 1.25em auto 0
+        }
+
+        .swal2-actions:not(.swal2-loading) .swal2-styled[disabled] {
+            opacity: .4
+        }
+
+        .swal2-actions:not(.swal2-loading) .swal2-styled:hover {
+            background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1))
+        }
+
+        .swal2-actions:not(.swal2-loading) .swal2-styled:active {
+            background-image: linear-gradient(rgba(0, 0, 0, .2), rgba(0, 0, 0, .2))
+        }
+
+        .swal2-actions.swal2-loading .swal2-styled.swal2-confirm {
+            box-sizing: border-box;
+            width: 2.5em;
+            height: 2.5em;
+            margin: .46875em;
+            padding: 0;
+            -webkit-animation: swal2-rotate-loading 1.5s linear 0s infinite normal;
+            animation: swal2-rotate-loading 1.5s linear 0s infinite normal;
+            border: .25em solid transparent;
+            border-radius: 100%;
+            border-color: transparent;
+            background-color: transparent !important;
+            color: transparent !important;
+            cursor: default;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none
+        }
+
+        .swal2-actions.swal2-loading .swal2-styled.swal2-cancel {
+            margin-right: 30px;
+            margin-left: 30px
+        }
+
+        .swal2-actions.swal2-loading :not(.swal2-styled).swal2-confirm::after {
+            content: "";
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            margin-left: 5px;
+            -webkit-animation: swal2-rotate-loading 1.5s linear 0s infinite normal;
+            animation: swal2-rotate-loading 1.5s linear 0s infinite normal;
+            border: 3px solid #999;
+            border-radius: 50%;
+            border-right-color: transparent;
+            box-shadow: 1px 1px 1px #fff
+        }
+
+        .swal2-styled {
+            margin: .3125em;
+            padding: .625em 2em;
+            box-shadow: none;
+            font-weight: 500
+        }
+
+        .swal2-styled:not([disabled]) {
+            cursor: pointer
+        }
+
+        .swal2-styled.swal2-confirm {
+            border: 0;
+            border-radius: .25em;
+            background: initial;
+            background-color: #3085d6;
+            color: #fff;
+            font-size: 1.0625em
+        }
+
+        .swal2-styled.swal2-cancel {
+            border: 0;
+            border-radius: .25em;
+            background: initial;
+            background-color: #aaa;
+            color: #fff;
+            font-size: 1.0625em
+        }
+
+        .swal2-styled:focus {
+            outline: 0;
+            box-shadow: 0 0 0 1px #fff, 0 0 0 3px rgba(50, 100, 150, .4)
+        }
+
+        .swal2-styled::-moz-focus-inner {
+            border: 0
+        }
+
+        .swal2-footer {
+            justify-content: center;
+            margin: 1.25em 0 0;
+            padding: 1em 0 0;
+            border-top: 1px solid #eee;
+            color: #545454;
+            font-size: 1em
+        }
+
+        .swal2-timer-progress-bar-container {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            height: .25em;
+            overflow: hidden;
+            border-bottom-right-radius: .3125em;
+            border-bottom-left-radius: .3125em
+        }
+
+        .swal2-timer-progress-bar {
+            width: 100%;
+            height: .25em;
+            background: rgba(0, 0, 0, .2)
+        }
+
+        .swal2-image {
+            max-width: 100%;
+            margin: 1.25em auto
+        }
+
+        .swal2-close {
+            position: absolute;
+            z-index: 2;
+            top: 0;
+            right: 0;
+            align-items: center;
+            justify-content: center;
+            width: 1.2em;
+            height: 1.2em;
+            padding: 0;
+            overflow: hidden;
+            transition: color .1s ease-out;
+            border: none;
+            border-radius: 0;
+            background: 0 0;
+            color: #ccc;
+            font-family: serif;
+            font-size: 2.5em;
+            line-height: 1.2;
+            cursor: pointer
+        }
+
+        .swal2-close:hover {
+            transform: none;
+            background: 0 0;
+            color: #f27474
+        }
+
+        .swal2-close::-moz-focus-inner {
+            border: 0
+        }
+
+        .swal2-content {
+            z-index: 1;
+            justify-content: center;
+            margin: 0;
+            padding: 0 1.6em;
+            color: #545454;
+            font-size: 1.125em;
+            font-weight: 400;
+            line-height: normal;
+            text-align: center;
+            word-wrap: break-word
+        }
+
+        .swal2-checkbox,
+        .swal2-file,
+        .swal2-input,
+        .swal2-radio,
+        .swal2-select,
+        .swal2-textarea {
+            margin: 1em auto
+        }
+
+        .swal2-file,
+        .swal2-input,
+        .swal2-textarea {
+            box-sizing: border-box;
+            width: 100%;
+            transition: border-color .3s, box-shadow .3s;
+            border: 1px solid #d9d9d9;
+            border-radius: .1875em;
+            background: inherit;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .06);
+            color: inherit;
+            font-size: 1.125em
+        }
+
+        .swal2-file.swal2-inputerror,
+        .swal2-input.swal2-inputerror,
+        .swal2-textarea.swal2-inputerror {
+            border-color: #f27474 !important;
+            box-shadow: 0 0 2px #f27474 !important
+        }
+
+        .swal2-file:focus,
+        .swal2-input:focus,
+        .swal2-textarea:focus {
+            border: 1px solid #b4dbed;
+            outline: 0;
+            box-shadow: 0 0 3px #c4e6f5
+        }
+
+        .swal2-file::-moz-placeholder,
+        .swal2-input::-moz-placeholder,
+        .swal2-textarea::-moz-placeholder {
+            color: #ccc
+        }
+
+        .swal2-file:-ms-input-placeholder,
+        .swal2-input:-ms-input-placeholder,
+        .swal2-textarea:-ms-input-placeholder {
+            color: #ccc
+        }
+
+        .swal2-file::-ms-input-placeholder,
+        .swal2-input::-ms-input-placeholder,
+        .swal2-textarea::-ms-input-placeholder {
+            color: #ccc
+        }
+
+        .swal2-file::placeholder,
+        .swal2-input::placeholder,
+        .swal2-textarea::placeholder {
+            color: #ccc
+        }
+
+        .swal2-range {
+            margin: 1em auto;
+            background: #fff
+        }
+
+        .swal2-range input {
+            width: 80%
+        }
+
+        .swal2-range output {
+            width: 20%;
+            color: inherit;
+            font-weight: 600;
+            text-align: center
+        }
+
+        .swal2-range input,
+        .swal2-range output {
+            height: 2.625em;
+            padding: 0;
+            font-size: 1.125em;
+            line-height: 2.625em
+        }
+
+        .swal2-input {
+            height: 2.625em;
+            padding: 0 .75em
+        }
+
+        .swal2-input[type=number] {
+            max-width: 10em
+        }
+
+        .swal2-file {
+            background: inherit;
+            font-size: 1.125em
+        }
+
+        .swal2-textarea {
+            height: 6.75em;
+            padding: .75em
+        }
+
+        .swal2-select {
+            min-width: 50%;
+            max-width: 100%;
+            padding: .375em .625em;
+            background: inherit;
+            color: inherit;
+            font-size: 1.125em
+        }
+
+        .swal2-checkbox,
+        .swal2-radio {
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            color: inherit
+        }
+
+        .swal2-checkbox label,
+        .swal2-radio label {
+            margin: 0 .6em;
+            font-size: 1.125em
+        }
+
+        .swal2-checkbox input,
+        .swal2-radio input {
+            margin: 0 .4em
+        }
+
+        .swal2-validation-message {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: .625em;
+            overflow: hidden;
+            background: #f0f0f0;
+            color: #666;
+            font-size: 1em;
+            font-weight: 300
+        }
+
+        .swal2-validation-message::before {
+            content: "!";
+            display: inline-block;
+            width: 1.5em;
+            min-width: 1.5em;
+            height: 1.5em;
+            margin: 0 .625em;
+            border-radius: 50%;
+            background-color: #f27474;
+            color: #fff;
+            font-weight: 600;
+            line-height: 1.5em;
+            text-align: center
+        }
+
+        .swal2-icon {
+            position: relative;
+            box-sizing: content-box;
+            justify-content: center;
+            width: 5em;
+            height: 5em;
+            margin: 1.25em auto 1.875em;
+            border: .25em solid transparent;
+            border-radius: 50%;
+            font-family: inherit;
+            line-height: 5em;
+            cursor: default;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none
+        }
+
+        .swal2-icon .swal2-icon-content {
+            display: flex;
+            align-items: center;
+            font-size: 3.75em
+        }
+
+        .swal2-icon.swal2-error {
+            border-color: #f27474;
+            color: #f27474
+        }
+
+        .swal2-icon.swal2-error .swal2-x-mark {
+            position: relative;
+            flex-grow: 1
+        }
+
+        .swal2-icon.swal2-error [class^=swal2-x-mark-line] {
+            display: block;
+            position: absolute;
+            top: 2.3125em;
+            width: 2.9375em;
+            height: .3125em;
+            border-radius: .125em;
+            background-color: #f27474
+        }
+
+        .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left] {
+            left: 1.0625em;
+            transform: rotate(45deg)
+        }
+
+        .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right] {
+            right: 1em;
+            transform: rotate(-45deg)
+        }
+
+        .swal2-icon.swal2-error.swal2-icon-show {
+            -webkit-animation: swal2-animate-error-icon .5s;
+            animation: swal2-animate-error-icon .5s
+        }
+
+        .swal2-icon.swal2-error.swal2-icon-show .swal2-x-mark {
+            -webkit-animation: swal2-animate-error-x-mark .5s;
+            animation: swal2-animate-error-x-mark .5s
+        }
+
+        .swal2-icon.swal2-warning {
+            border-color: #facea8;
+            color: #f8bb86
+        }
+
+        .swal2-icon.swal2-info {
+            border-color: #9de0f6;
+            color: #3fc3ee
+        }
+
+        .swal2-icon.swal2-question {
+            border-color: #c9dae1;
+            color: #87adbd
+        }
+
+        .swal2-icon.swal2-success {
+            border-color: #a5dc86;
+            color: #a5dc86
+        }
+
+        .swal2-icon.swal2-success [class^=swal2-success-circular-line] {
+            position: absolute;
+            width: 3.75em;
+            height: 7.5em;
+            transform: rotate(45deg);
+            border-radius: 50%
+        }
+
+        .swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=left] {
+            top: -.4375em;
+            left: -2.0635em;
+            transform: rotate(-45deg);
+            transform-origin: 3.75em 3.75em;
+            border-radius: 7.5em 0 0 7.5em
+        }
+
+        .swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=right] {
+            top: -.6875em;
+            left: 1.875em;
+            transform: rotate(-45deg);
+            transform-origin: 0 3.75em;
+            border-radius: 0 7.5em 7.5em 0
+        }
+
+        .swal2-icon.swal2-success .swal2-success-ring {
+            position: absolute;
+            z-index: 2;
+            top: -.25em;
+            left: -.25em;
+            box-sizing: content-box;
+            width: 100%;
+            height: 100%;
+            border: .25em solid rgba(165, 220, 134, .3);
+            border-radius: 50%
+        }
+
+        .swal2-icon.swal2-success .swal2-success-fix {
+            position: absolute;
+            z-index: 1;
+            top: .5em;
+            left: 1.625em;
+            width: .4375em;
+            height: 5.625em;
+            transform: rotate(-45deg)
+        }
+
+        .swal2-icon.swal2-success [class^=swal2-success-line] {
+            display: block;
+            position: absolute;
+            z-index: 2;
+            height: .3125em;
+            border-radius: .125em;
+            background-color: #a5dc86
+        }
+
+        .swal2-icon.swal2-success [class^=swal2-success-line][class$=tip] {
+            top: 2.875em;
+            left: .8125em;
+            width: 1.5625em;
+            transform: rotate(45deg)
+        }
+
+        .swal2-icon.swal2-success [class^=swal2-success-line][class$=long] {
+            top: 2.375em;
+            right: .5em;
+            width: 2.9375em;
+            transform: rotate(-45deg)
+        }
+
+        .swal2-icon.swal2-success.swal2-icon-show .swal2-success-line-tip {
+            -webkit-animation: swal2-animate-success-line-tip .75s;
+            animation: swal2-animate-success-line-tip .75s
+        }
+
+        .swal2-icon.swal2-success.swal2-icon-show .swal2-success-line-long {
+            -webkit-animation: swal2-animate-success-line-long .75s;
+            animation: swal2-animate-success-line-long .75s
+        }
+
+        .swal2-icon.swal2-success.swal2-icon-show .swal2-success-circular-line-right {
+            -webkit-animation: swal2-rotate-success-circular-line 4.25s ease-in;
+            animation: swal2-rotate-success-circular-line 4.25s ease-in
+        }
+
+        .swal2-progress-steps {
+            align-items: center;
+            margin: 0 0 1.25em;
+            padding: 0;
+            background: inherit;
+            font-weight: 600
+        }
+
+        .swal2-progress-steps li {
+            display: inline-block;
+            position: relative
+        }
+
+        .swal2-progress-steps .swal2-progress-step {
+            z-index: 20;
+            width: 2em;
+            height: 2em;
+            border-radius: 2em;
+            background: #3085d6;
+            color: #fff;
+            line-height: 2em;
+            text-align: center
+        }
+
+        .swal2-progress-steps .swal2-progress-step.swal2-active-progress-step {
+            background: #3085d6
+        }
+
+        .swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step {
+            background: #add8e6;
+            color: #fff
+        }
+
+        .swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step-line {
+            background: #add8e6
+        }
+
+        .swal2-progress-steps .swal2-progress-step-line {
+            z-index: 10;
+            width: 2.5em;
+            height: .4em;
+            margin: 0 -1px;
+            background: #3085d6
+        }
+
+        [class^=swal2] {
+            -webkit-tap-highlight-color: transparent
+        }
+
+        .swal2-show {
+            -webkit-animation: swal2-show .3s;
+            animation: swal2-show .3s
+        }
+
+        .swal2-hide {
+            -webkit-animation: swal2-hide .15s forwards;
+            animation: swal2-hide .15s forwards
+        }
+
+        .swal2-noanimation {
+            transition: none
+        }
+
+        .swal2-scrollbar-measure {
+            position: absolute;
+            top: -9999px;
+            width: 50px;
+            height: 50px;
+            overflow: scroll
+        }
+
+        .swal2-rtl .swal2-close {
+            right: auto;
+            left: 0
+        }
+
+        .swal2-rtl .swal2-timer-progress-bar {
+            right: 0;
+            left: auto
+        }
+
+        @supports (-ms-accelerator:true) {
+            .swal2-range input {
+                width: 100% !important
+            }
+
+            .swal2-range output {
+                display: none
+            }
+        }
+
+        @media all and (-ms-high-contrast:none),
+        (-ms-high-contrast:active) {
+            .swal2-range input {
+                width: 100% !important
+            }
+
+            .swal2-range output {
+                display: none
+            }
+        }
+
+        @-moz-document url-prefix() {
+            .swal2-close:focus {
+                outline: 2px solid rgba(50, 100, 150, .4)
+            }
+        }
+
+        @-webkit-keyframes swal2-toast-show {
+            0% {
+                transform: translateY(-.625em) rotateZ(2deg)
+            }
+
+            33% {
+                transform: translateY(0) rotateZ(-2deg)
+            }
+
+            66% {
+                transform: translateY(.3125em) rotateZ(2deg)
+            }
+
+            100% {
+                transform: translateY(0) rotateZ(0)
+            }
+        }
+
+        @keyframes swal2-toast-show {
+            0% {
+                transform: translateY(-.625em) rotateZ(2deg)
+            }
+
+            33% {
+                transform: translateY(0) rotateZ(-2deg)
+            }
+
+            66% {
+                transform: translateY(.3125em) rotateZ(2deg)
+            }
+
+            100% {
+                transform: translateY(0) rotateZ(0)
+            }
+        }
+
+        @-webkit-keyframes swal2-toast-hide {
+            100% {
+                transform: rotateZ(1deg);
+                opacity: 0
+            }
+        }
+
+        @keyframes swal2-toast-hide {
+            100% {
+                transform: rotateZ(1deg);
+                opacity: 0
+            }
+        }
+
+        @-webkit-keyframes swal2-toast-animate-success-line-tip {
+            0% {
+                top: .5625em;
+                left: .0625em;
+                width: 0
+            }
+
+            54% {
+                top: .125em;
+                left: .125em;
+                width: 0
+            }
+
+            70% {
+                top: .625em;
+                left: -.25em;
+                width: 1.625em
+            }
+
+            84% {
+                top: 1.0625em;
+                left: .75em;
+                width: .5em
+            }
+
+            100% {
+                top: 1.125em;
+                left: .1875em;
+                width: .75em
+            }
+        }
+
+        @keyframes swal2-toast-animate-success-line-tip {
+            0% {
+                top: .5625em;
+                left: .0625em;
+                width: 0
+            }
+
+            54% {
+                top: .125em;
+                left: .125em;
+                width: 0
+            }
+
+            70% {
+                top: .625em;
+                left: -.25em;
+                width: 1.625em
+            }
+
+            84% {
+                top: 1.0625em;
+                left: .75em;
+                width: .5em
+            }
+
+            100% {
+                top: 1.125em;
+                left: .1875em;
+                width: .75em
+            }
+        }
+
+        @-webkit-keyframes swal2-toast-animate-success-line-long {
+            0% {
+                top: 1.625em;
+                right: 1.375em;
+                width: 0
+            }
+
+            65% {
+                top: 1.25em;
+                right: .9375em;
+                width: 0
+            }
+
+            84% {
+                top: .9375em;
+                right: 0;
+                width: 1.125em
+            }
+
+            100% {
+                top: .9375em;
+                right: .1875em;
+                width: 1.375em
+            }
+        }
+
+        @keyframes swal2-toast-animate-success-line-long {
+            0% {
+                top: 1.625em;
+                right: 1.375em;
+                width: 0
+            }
+
+            65% {
+                top: 1.25em;
+                right: .9375em;
+                width: 0
+            }
+
+            84% {
+                top: .9375em;
+                right: 0;
+                width: 1.125em
+            }
+
+            100% {
+                top: .9375em;
+                right: .1875em;
+                width: 1.375em
+            }
+        }
+
+        @-webkit-keyframes swal2-show {
+            0% {
+                transform: scale(.7)
+            }
+
+            45% {
+                transform: scale(1.05)
+            }
+
+            80% {
+                transform: scale(.95)
+            }
+
+            100% {
+                transform: scale(1)
+            }
+        }
+
+        @keyframes swal2-show {
+            0% {
+                transform: scale(.7)
+            }
+
+            45% {
+                transform: scale(1.05)
+            }
+
+            80% {
+                transform: scale(.95)
+            }
+
+            100% {
+                transform: scale(1)
+            }
+        }
+
+        @-webkit-keyframes swal2-hide {
+            0% {
+                transform: scale(1);
+                opacity: 1
+            }
+
+            100% {
+                transform: scale(.5);
+                opacity: 0
+            }
+        }
+
+        @keyframes swal2-hide {
+            0% {
+                transform: scale(1);
+                opacity: 1
+            }
+
+            100% {
+                transform: scale(.5);
+                opacity: 0
+            }
+        }
+
+        @-webkit-keyframes swal2-animate-success-line-tip {
+            0% {
+                top: 1.1875em;
+                left: .0625em;
+                width: 0
+            }
+
+            54% {
+                top: 1.0625em;
+                left: .125em;
+                width: 0
+            }
+
+            70% {
+                top: 2.1875em;
+                left: -.375em;
+                width: 3.125em
+            }
+
+            84% {
+                top: 3em;
+                left: 1.3125em;
+                width: 1.0625em
+            }
+
+            100% {
+                top: 2.8125em;
+                left: .8125em;
+                width: 1.5625em
+            }
+        }
+
+        @keyframes swal2-animate-success-line-tip {
+            0% {
+                top: 1.1875em;
+                left: .0625em;
+                width: 0
+            }
+
+            54% {
+                top: 1.0625em;
+                left: .125em;
+                width: 0
+            }
+
+            70% {
+                top: 2.1875em;
+                left: -.375em;
+                width: 3.125em
+            }
+
+            84% {
+                top: 3em;
+                left: 1.3125em;
+                width: 1.0625em
+            }
+
+            100% {
+                top: 2.8125em;
+                left: .8125em;
+                width: 1.5625em
+            }
+        }
+
+        @-webkit-keyframes swal2-animate-success-line-long {
+            0% {
+                top: 3.375em;
+                right: 2.875em;
+                width: 0
+            }
+
+            65% {
+                top: 3.375em;
+                right: 2.875em;
+                width: 0
+            }
+
+            84% {
+                top: 2.1875em;
+                right: 0;
+                width: 3.4375em
+            }
+
+            100% {
+                top: 2.375em;
+                right: .5em;
+                width: 2.9375em
+            }
+        }
+
+        @keyframes swal2-animate-success-line-long {
+            0% {
+                top: 3.375em;
+                right: 2.875em;
+                width: 0
+            }
+
+            65% {
+                top: 3.375em;
+                right: 2.875em;
+                width: 0
+            }
+
+            84% {
+                top: 2.1875em;
+                right: 0;
+                width: 3.4375em
+            }
+
+            100% {
+                top: 2.375em;
+                right: .5em;
+                width: 2.9375em
+            }
+        }
+
+        @-webkit-keyframes swal2-rotate-success-circular-line {
+            0% {
+                transform: rotate(-45deg)
+            }
+
+            5% {
+                transform: rotate(-45deg)
+            }
+
+            12% {
+                transform: rotate(-405deg)
+            }
+
+            100% {
+                transform: rotate(-405deg)
+            }
+        }
+
+        @keyframes swal2-rotate-success-circular-line {
+            0% {
+                transform: rotate(-45deg)
+            }
+
+            5% {
+                transform: rotate(-45deg)
+            }
+
+            12% {
+                transform: rotate(-405deg)
+            }
+
+            100% {
+                transform: rotate(-405deg)
+            }
+        }
+
+        @-webkit-keyframes swal2-animate-error-x-mark {
+            0% {
+                margin-top: 1.625em;
+                transform: scale(.4);
+                opacity: 0
+            }
+
+            50% {
+                margin-top: 1.625em;
+                transform: scale(.4);
+                opacity: 0
+            }
+
+            80% {
+                margin-top: -.375em;
+                transform: scale(1.15)
+            }
+
+            100% {
+                margin-top: 0;
+                transform: scale(1);
+                opacity: 1
+            }
+        }
+
+        @keyframes swal2-animate-error-x-mark {
+            0% {
+                margin-top: 1.625em;
+                transform: scale(.4);
+                opacity: 0
+            }
+
+            50% {
+                margin-top: 1.625em;
+                transform: scale(.4);
+                opacity: 0
+            }
+
+            80% {
+                margin-top: -.375em;
+                transform: scale(1.15)
+            }
+
+            100% {
+                margin-top: 0;
+                transform: scale(1);
+                opacity: 1
+            }
+        }
+
+        @-webkit-keyframes swal2-animate-error-icon {
+            0% {
+                transform: rotateX(100deg);
+                opacity: 0
+            }
+
+            100% {
+                transform: rotateX(0);
+                opacity: 1
+            }
+        }
+
+        @keyframes swal2-animate-error-icon {
+            0% {
+                transform: rotateX(100deg);
+                opacity: 0
+            }
+
+            100% {
+                transform: rotateX(0);
+                opacity: 1
+            }
+        }
+
+        @-webkit-keyframes swal2-rotate-loading {
+            0% {
+                transform: rotate(0)
+            }
+
+            100% {
+                transform: rotate(360deg)
+            }
+        }
+
+        @keyframes swal2-rotate-loading {
+            0% {
+                transform: rotate(0)
+            }
+
+            100% {
+                transform: rotate(360deg)
+            }
+        }
+
+        body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) {
+            overflow: hidden
+        }
+
+        body.swal2-height-auto {
+            height: auto !important
+        }
+
+        body.swal2-no-backdrop .swal2-container {
+            top: auto;
+            right: auto;
+            bottom: auto;
+            left: auto;
+            max-width: calc(100% - .625em * 2);
+            background-color: transparent !important
+        }
+
+        body.swal2-no-backdrop .swal2-container>.swal2-modal {
+            box-shadow: 0 0 10px rgba(0, 0, 0, .4)
+        }
+
+        body.swal2-no-backdrop .swal2-container.swal2-top {
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%)
+        }
+
+        body.swal2-no-backdrop .swal2-container.swal2-top-left,
+        body.swal2-no-backdrop .swal2-container.swal2-top-start {
+            top: 0;
+            left: 0
+        }
+
+        body.swal2-no-backdrop .swal2-container.swal2-top-end,
+        body.swal2-no-backdrop .swal2-container.swal2-top-right {
+            top: 0;
+            right: 0
+        }
+
+        body.swal2-no-backdrop .swal2-container.swal2-center {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%)
+        }
+
+        body.swal2-no-backdrop .swal2-container.swal2-center-left,
+        body.swal2-no-backdrop .swal2-container.swal2-center-start {
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%)
+        }
+
+        body.swal2-no-backdrop .swal2-container.swal2-center-end,
+        body.swal2-no-backdrop .swal2-container.swal2-center-right {
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%)
+        }
+
+        body.swal2-no-backdrop .swal2-container.swal2-bottom {
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%)
+        }
+
+        body.swal2-no-backdrop .swal2-container.swal2-bottom-left,
+        body.swal2-no-backdrop .swal2-container.swal2-bottom-start {
+            bottom: 0;
+            left: 0
+        }
+
+        body.swal2-no-backdrop .swal2-container.swal2-bottom-end,
+        body.swal2-no-backdrop .swal2-container.swal2-bottom-right {
+            right: 0;
+            bottom: 0
+        }
+
+        @media print {
+            body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) {
+                overflow-y: scroll !important
+            }
+
+            body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown)>[aria-hidden=true] {
+                display: none
+            }
+
+            body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) .swal2-container {
+                position: static !important
+            }
+        }
+
+        body.swal2-toast-shown .swal2-container {
+            background-color: transparent
+        }
+
+        body.swal2-toast-shown .swal2-container.swal2-top {
+            top: 0;
+            right: auto;
+            bottom: auto;
+            left: 50%;
+            transform: translateX(-50%)
+        }
+
+        body.swal2-toast-shown .swal2-container.swal2-top-end,
+        body.swal2-toast-shown .swal2-container.swal2-top-right {
+            top: 0;
+            right: 0;
+            bottom: auto;
+            left: auto
+        }
+
+        body.swal2-toast-shown .swal2-container.swal2-top-left,
+        body.swal2-toast-shown .swal2-container.swal2-top-start {
+            top: 0;
+            right: auto;
+            bottom: auto;
+            left: 0
+        }
+
+        body.swal2-toast-shown .swal2-container.swal2-center-left,
+        body.swal2-toast-shown .swal2-container.swal2-center-start {
+            top: 50%;
+            right: auto;
+            bottom: auto;
+            left: 0;
+            transform: translateY(-50%)
+        }
+
+        body.swal2-toast-shown .swal2-container.swal2-center {
+            top: 50%;
+            right: auto;
+            bottom: auto;
+            left: 50%;
+            transform: translate(-50%, -50%)
+        }
+
+        body.swal2-toast-shown .swal2-container.swal2-center-end,
+        body.swal2-toast-shown .swal2-container.swal2-center-right {
+            top: 50%;
+            right: 0;
+            bottom: auto;
+            left: auto;
+            transform: translateY(-50%)
+        }
+
+        body.swal2-toast-shown .swal2-container.swal2-bottom-left,
+        body.swal2-toast-shown .swal2-container.swal2-bottom-start {
+            top: auto;
+            right: auto;
+            bottom: 0;
+            left: 0
+        }
+
+        body.swal2-toast-shown .swal2-container.swal2-bottom {
+            top: auto;
+            right: auto;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%)
+        }
+
+        body.swal2-toast-shown .swal2-container.swal2-bottom-end,
+        body.swal2-toast-shown .swal2-container.swal2-bottom-right {
+            top: auto;
+            right: 0;
+            bottom: 0;
+            left: auto
+        }
+
+        body.swal2-toast-column .swal2-toast {
+            flex-direction: column;
+            align-items: stretch
+        }
+
+        body.swal2-toast-column .swal2-toast .swal2-actions {
+            flex: 1;
+            align-self: stretch;
+            height: 2.2em;
+            margin-top: .3125em
+        }
+
+        body.swal2-toast-column .swal2-toast .swal2-loading {
+            justify-content: center
+        }
+
+        body.swal2-toast-column .swal2-toast .swal2-input {
+            height: 2em;
+            margin: .3125em auto;
+            font-size: 1em
+        }
+
+        body.swal2-toast-column .swal2-toast .swal2-validation-message {
+            font-size: 1em
+        }
+    </style>
+
+
+    <style type="text/css">
+        /* Chart.js */
+        @-webkit-keyframes chartjs-render-animation {
+            from {
+                opacity: 0.99
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        @keyframes chartjs-render-animation {
+            from {
+                opacity: 0.99
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        .chartjs-render-monitor {
+            -webkit-animation: chartjs-render-animation 0.001s;
+            animation: chartjs-render-animation 0.001s;
+        }
+    </style>
+
+    <!--<script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="a38602b3-56ff-410a-ae05-6039a244030d";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>-->
+    <!-- Smartsupp Live Chat script -->
+    
+
+
+    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!-- ========== Paste This one brfore the (/header>) Tag ========== -->
+    <!-- Fake Notifications stylesheet -->
+    <link rel="stylesheet" href="dash2/alert/css/fake-notification-min.css">
+    <link rel="stylesheet" href="dash2/alert/css/animate.min.css">
+    <link rel="stylesheet" href="dash2/alert/css/font-awesome.min.css">
+
+
+    <style>
+        #popupmain {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1001;
+        }
+
+        #popupfo {
+            width: 300px;
+            height: auto;
+            background-color: white;
+            background-size: cover;
+            color: black;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            /*box-shadow: 2px 2px 2px 2px black;*/
+            text-align: center;
+            border-radius: 4px;
+
+
+        }
+
+        .submitId {
+            color: white;
+            background-color: gray;
+            border: none;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            width: 50px;
+            height: 40px;
+            border-radius: 4px;
+        }
+
+        abbr::after {
+            content: counter(count);
+            animation: counter 5s linear infinite alternate;
+            counter-resert: count 0;
+        }
+
+        @keyframes counter {
+            0% {
+                counter-increment: count 37977;
+            }
+
+            10% {
+                counter-increment: count 38013;
+            }
+
+            20% {
+                counter-increment: count 37800;
+            }
+
+            30% {
+                counter-increment: count 37829;
+            }
+
+            40% {
+                counter-increment: count 37850;
+            }
+
+            50% {
+                counter-increment: count 37899;
+            }
+
+            60% {
+                counter-increment: count 37891;
+            }
+
+            70% {
+                counter-increment: count 37980;
+            }
+
+            80% {
+                counter-increment: count 37987;
+            }
+
+            90% {
+                counter-increment: count 37967;
+            }
+
+            100% {
+                counter-increment: count 37768;
+            }
+        }
+
+        .counter {
+            width: 100px;
+            overflow: hidden;
+        }
+
+        .numbers {
+            width: auto;
+            display: flex;
+            animation: countNumber 20s linear infinite alternate;
+            animation-timing-function: steps(10);
+        }
+
+        .numbers div {
+            text-align: center;
+            flex: 0 0 100px;
+        }
+
+        @keyframes countNumber {
+            0% {
+                margin-right: 100px;
+            }
+
+            100% {
+                margin-left: -1000px;
+            }
+        }
+    </style>
+
+    <style type="text/css">
+        /* Chart.js */
+        @-webkit-keyframes chartjs-render-animation {
+            from {
+                opacity: 0.99
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        @keyframes chartjs-render-animation {
+            from {
+                opacity: 0.99
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        .chartjs-render-monitor {
+            -webkit-animation: chartjs-render-animation 0.001s;
+            animation: chartjs-render-animation 0.001s;
+        }
+    </style>
+    <style data-styled="active" data-styled-version="5.1.1">
+
+    </style>
+    <!-- Smartsupp Live Chat script -->
+    <script type="text/javascript">
+        var _smartsupp = _smartsupp || {};
+        _smartsupp.key = 'd7f45771c58238ab906d02ccffc6d109a291a33e';
+        window.smartsupp || (function (d) {
+            var s, c, o = smartsupp = function () { o._.push(arguments) }; o._ = [];
+            s = d.getElementsByTagName('script')[0]; c = d.createElement('script');
+            c.type = 'text/javascript'; c.charset = 'utf-8'; c.async = true;
+            c.src = 'https://www.smartsuppchat.com/loader.js?'; s.parentNode.insertBefore(c, s);
+        })(document);
+    </script>
+    
+
+</head>
+
+<style>
+    #popupmain {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 1001;
+    }
+
+    #popupfo {
+        width: 300px;
+        height: auto;
+        background-color: white;
+        background-size: cover;
+        color: black;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        /*box-shadow: 2px 2px 2px 2px black;*/
+        text-align: center;
+        border-radius: 4px;
+
+
+    }
+
+    .submitId {
+        color: white;
+        background-color: gray;
+        border: none;
+        margin-top: 15px;
+        margin-bottom: 5px;
+        width: 50px;
+        height: 40px;
+        border-radius: 4px;
+    }
+</style>
+
+<body class="fixed-navbar sidebar-mini has-animation">
+
+
+
+    <!-- ========== END COPYING HERE ========== -->
+
+    <div id="ytWidget" style="
+  position: fixed;
+  bottom: 350px;
+  right: 20px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 4px;
+
+  "></div>
+
+    <script
+        src="https://translate.yandex.net/website-widget/v1/widget.js?widgetId=ytWidget&pageLang=en&widgetTheme=light&autoMode=true"
+        type="text/javascript"></script>
+
+
+
+    <!-- ========== Paste this one after the <body tag )  ========== -->
+    <div id="notification-1" class="notification">
+        <div class="notification-block">
+            <div class="notification-img">
+                <!-- Your image or icon -->
+                <i class="fa fa-btc" aria-hidden="true"></i>
+                <!-- / Your image or icon -->
+            </div>
+            <div class="notification-text-block">
+                <div class="notification-title">
+                    <!-- Notification Title -->
+                    Earning
+                    <!-- / Notification Title -->
+                </div>
+                <div class="notification-text"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <div class="page-wrapper">
+        <!-- START HEADER-->
+        <header class="header">
+            <div class="page-brand">
+                <a class="link" href="/index">
+                    <span class="brand">Stockexchangecryptomanagement <!-- <span class="brand-tip">CAST</span> -->
+                    </span>
+                    <span class="brand-mini">SEM</span>
+                </a>
+            </div>
+            <div class="flexbox flex-1">
+                <!-- START TOP-LEFT TOOLBAR-->
+                <ul class="nav navbar-toolbar">
+                    <li>
+                        <a class="nav-link sidebar-toggler js-sidebar-toggler"><i style="color: white;"
+                                class="fa fa-navicon"></i></a>
+                    </li>
+                </ul>
+                <!-- END TOP-LEFT TOOLBAR-->
+                <!-- START TOP-RIGHT TOOLBAR-->
+                <ul class="nav navbar-toolbar">
+                    <li class="dropdown dropdown-inbox">
+                        
+                        <ul class="dropdown-menu dropdown-menu-right dropdown-menu-media">
+                            <li class="dropdown-menu-header">
+                                <div>
+                                    <span><strong> New</strong> Deposit</span>
+                                    <a class="pull-right" href="">+70%</a>
+                                </div>
+                            </li>
+                            <div class="slimScrollDiv"
+                                style="position: relative; overflow: hidden; width: auto; height: 240px;">
+                                <li class="list-group list-group-divider scroller" data-height="240px"
+                                    data-color="#71808f" style="overflow: hidden; width: auto; height: 240px;">
+                                    <div>
+
+
+
+
+
+
+
+                                        <a class="list-group-item">
+                                            <div class="media">
+                                                <div class="media-body">
+                                                    <h6>$ 8,000.00 invested </h6><small class="text-muted">Just
+                                                        now</small>
+                                                    <div class="font-13" style="color: orange;">TRANSACTION USERNAME:
+                                                        <b>Mqengqwa</b>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+
+
+
+
+
+
+
+
+                                        <a class="list-group-item">
+                                            <div class="media">
+                                                <div class="media-body">
+                                                    <h6>$ 1,500.00 invested </h6><small class="text-muted">Just
+                                                        now</small>
+                                                    <div class="font-13" style="color: orange;">TRANSACTION USERNAME:
+                                                        <b>Matjeke</b>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+
+
+
+
+
+
+
+
+                                        <a class="list-group-item">
+                                            <div class="media">
+                                                <div class="media-body">
+                                                    <h6>$ 21,000.00 invested </h6><small class="text-muted">Just
+                                                        now</small>
+                                                    <div class="font-13" style="color: orange;">TRANSACTION USERNAME:
+                                                        <b>Madileng</b>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+
+                                        <a class="list-group-item">
+                                            <div class="media">
+                                                <div class="media-body">
+                                                    <h6>$ 8,000.00 invested </h6><small class="text-muted">Just
+                                                        now</small>
+                                                    <div class="font-13" style="color: orange;">TRANSACTION USERNAME:
+                                                        <b>Mkurah</b>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+
+
+
+
+
+
+
+
+                                        <a class="list-group-item">
+                                            <div class="media">
+                                                <div class="media-body">
+                                                    <h6>$ 201,000.00 invested </h6><small class="text-muted">Just
+                                                        now</small>
+                                                    <div class="font-13" style="color: orange;">TRANSACTION USERNAME:
+                                                        <b>Mthokozisi</b>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+
+                                    </div>
+                                </li>
+                                <div class="slimScrollBar"
+                                    style="background: rgb(113, 128, 143); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px;">
+                                </div>
+                                <div class="slimScrollRail"
+                                    style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.9; z-index: 90; right: 1px;">
+                                </div>
+                            </div>
+                        </ul>
+                    </li>
+                    <li class="dropdown dropdown-user">
+                        <a class="nav-link dropdown-toggle link" data-toggle="dropdown" style="color: #23b7e5;">
+                            <span></span>Hi! <%=user.email%>, <i class="fa fa-angle-down m-l-5"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <!-- <a class="dropdown-item" href="profile"><i class="fa fa-user"></i>Profile</a> -->
+                            <!-- <a class="dropdown-item" href="profile"><i class="fa fa-cog"></i>Settings</a> -->
+                            <a class="dropdown-item" href="/support"><i class="fa fa-support"></i>Support</a>
+                            <li class="dropdown-divider"></li>
+                            <a class="dropdown-item" href="/logout"><i class="fa fa-power-off"></i>Logout</a>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- END TOP-RIGHT TOOLBAR-->
+            </div>
+        </header>
+        <!-- END HEADER-->
+        <!-- START SIDEBAR-->
+        <nav class="page-sidebar" id="sidebar">
+            <div id="sidebar-collapse">
+                <div class="admin-block d-flex">
+                    <div>
+                        <img src="dash2/address_files/admin-avatar.png" width="45px">
+                    </div>
+                    <div class="admin-info">
+                        <div class="font-strong"> </div><small style="color: red;"></small>
+                    </div>
+                </div>
+                <ul class="side-menu metismenu">
+                    <li>
+                        <a class="active" href="/index"><i class="sidebar-item-icon fa fa-home"></i>
+                            <span class="nav-label">Home</span>
+                        </a>
+                    </li>
+                    <li class="heading">FEATURES</li>
+                    <li>
+                        <a href="/trade_center"><i class="sidebar-item-icon fa fa-bar-chart"></i>
+                            <span class="nav-label">Trade Center</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/deposit"><i class="sidebar-item-icon fa fa-money"></i>
+                            <span class="nav-label">Fund Account</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/withdraw"><i class="sidebar-item-icon fa fa-credit-card"></i>
+                            <span class="nav-label">Place Withdraw</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/upgrade"><i class="sidebar-item-icon fa fa-bolt"></i>
+                            <span class="nav-label">Upgrade Trade</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/password"><i class="sidebar-item-icon fa fa-lock"></i>
+                            <span class="nav-label">Update Password</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/support"><i class="sidebar-item-icon fa fa-comment"></i>
+                            <span class="nav-label">Chat With us</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/recent_withdraw"><i class="sidebar-item-icon fa fa fa-bullseye"></i>
+                            <span class="nav-label">Recent Withdraw</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/logout"><i class="sidebar-item-icon fa fa-close"></i>
+                            <span class="nav-label">Log Out</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- END SIDEBAR-->
+        <div class="content-wrapper">
+            <!-- START PAGE CONTENT-->
+
+            <div class="page-heading">
+                <h1 class="page-title" style="color: #FFF;">Create Investment</h1>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href=""><i class="la la-home font-20"></i></a>
+                    </li>
+                    <!-- <li class="breadcrumb-item">DataTables</li> -->
+                </ol>
+            </div>
+            <div class="page-content fade-in-up">
+                <div class="ibox">
+                    <div class="ibox-head">
+                        <div class="ibox-title">Investment Capital</div>
+                    </div>
+                    <div class="ibox-body">
+
+                        <form method="POST" action="/deposit" style="max-width: 500px;">
+                            <div class="form-group">
+
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group-icon">
+                                    <div class="input-icon"><i class="fa fa-money text-primary font-15"></i> $</div>
+                                    <input class="form-control" name="amount" type="number" placeholder="Amount"
+                                        required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group-icon">
+                                    <div class="input-icon"><i class="fa fa-user text-primary font-15"></i></div>
+                                    <select class="form-control" name="method" required>
+                                        <option value="BITCOIN">MEANS OF PAYMENT</option>
+                                        <option value="BITCOIN">BITCOIN</option>
+                                        <option value="ZELLE">ZELLE</option>
+                                        <option value="CASHAPP">CASHAPP</option>
+                                        <option value="CASHAPP">ETHERIUM</option>
+                                        <option value="CASHAPP">GCASH</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <button class="btn btn-success" style="
+    padding-left: 20px; padding-right: 20px; width: 100%;" type="submit" name="deposit_me">Create Deposit
+                                    Transaction</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-content fade-in-up">
+                <div class="ibox">
+                    <div class="ibox-head">
+                        <div class="ibox-title">My Deposit History</div>
+                        <div class="ibox-tools">
+                            <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                        </div>
+                    </div>
+                    <div class="ibox-body">
+
+
+                        <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0"
+                            width="100%">
+                            <thead>
+                                <tr>
+                                    <th>#ID</th>
+                                    <th>Status</th>
+                                    <th>Deposit ID</th>
+                                    <th>Type</th>
+                                    <th>Amount</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+                                <% deposits.map((data,index)=>{ %>
+                                    <tr>
+                                        <td><%=index%></td>
+                                        <td>
+                                            <b class="_pay_now" style="float: left; width: 100px; text-align: center;">
+                                                <div class="badge badge-success badge-danger"><%=data.status%></div>
+                                        <td><%=data.depositId%></td>
+                                        <td><%=data.type%></td>
+                                        <td><%=data.amount%></td>
+                                        <td><%=data.date%></td>
+                                        <td colspan="4">
+                                            <a href='/payment/<%=data.type%>'>
+                                                <b class='_pay_now _pay_now1'
+                                                    style='background: orange; text-align: center; width: 100%;'>PAY
+                                                    NOW</b></a>
+                                        </td>
+                                    </tr>
+
+                                    <%}) %>
+
+
+
+
+
+
+
+
+
+
+
+
+                                        <tr style="width: 100%;
+    padding: 3px; background: #ffff001f; overflow: hidden;">
+                                            <td colspan="4">
+                                                <b><i><small style="color: blue;">Click <b>PAY NOW</b> button to make
+                                                            payment.
+                                                            Your account will be fundded once your payment is
+                                                            confirmed.</small></i></b>
+                                            </td>
+                                        </tr>
+
+                            </tbody>
+                        </table>
+
+
+
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- END PAGE CONTENT-->
+            <footer class="page-footer">
+                <div class="font-13">© 2022 <b>Stockexchangecryptomanagement</b> - All rights reserved.</div>
+                <div class="to-top"><i class="fa fa-angle-double-up"></i></div>
+            </footer>
+        </div>
+    </div>
+
+
+    <style type="text/css">
+        ._w89 {
+            width: 80% !important;
+            margin-top: 10px;
+            border-radius: 3px;
+            display: block;
+            overflow: hidden;
+        }
+
+        #cWIIT {
+            opacity: 0;
+            height: 0px;
+            width: 0px;
+            position: fixed;
+            top: 0;
+        }
+
+        ._pay_now,
+        ._pay_now_ {
+            background: #00AFEF;
+            border-radius: 5px;
+            color: #FFF;
+            padding: 5px 10px;
+            cursor: pointer;
+            overflow: hidden;
+            /*float: left;*/
+        }
+
+        .up_bx {
+            width: 240px;
+            /* padding: 20px; */
+            display: inline-block;
+            /* margin: 5px; */
+            background: #FFF;
+            border: 1px dashed #00afef;
+            box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+            /* border-radius: 2px; */
+            margin-bottom: 10px;
+        }
+
+        ._upGH {
+            font-size: 35px;
+            font-weight: 900;
+        }
+
+        ._upGP {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #00AFEF;
+            font-weight: 900;
+        }
+
+        ._upTXT {
+            font-size: 15px;
+            padding: 10px;
+            border-top: 1px dashed #00AFEF;
+        }
+
+        ._upgrade_ {
+            background: #00afef;
+            padding: 10px;
+            font-weight: 800;
+            color: #FFF;
+            /*border-radius: 10px;*/
+            margin: 0px;
+        }
+
+        .ibox-body {
+            overflow: hidden;
+            overflow-x: scroll;
+        }
+
+        table {
+            margin-right: 15px;
+        }
+    </style>
+
+    <!-- BEGIN THEME CONFIG PANEL-->
+    <!-- <div class="theme-config">
+<div class="theme-config-toggle"><i class="fa fa-cog theme-config-show"></i><i class="ti-close theme-config-close"></i></div>
+<div class="theme-config-box">
+<div class="text-center font-18 m-b-20">SETTINGS</div>
+<div class="font-strong">LAYOUT OPTIONS</div>
+<div class="check-list m-b-20 m-t-10">
+<label class="ui-checkbox ui-checkbox-gray">
+<input id="_fixedNavbar" type="checkbox" checked>
+<span class="input-span"></span>Fixed navbar</label>
+<label class="ui-checkbox ui-checkbox-gray">
+<input id="_fixedlayout" type="checkbox">
+<span class="input-span"></span>Fixed layout</label>
+<label class="ui-checkbox ui-checkbox-gray">
+<input class="js-sidebar-toggler" type="checkbox">
+<span class="input-span"></span>Collapse sidebar</label>
+</div>
+<div class="font-strong">LAYOUT STYLE</div>
+<div class="m-t-10">
+<label class="ui-radio ui-radio-gray m-r-10">
+<input type="radio" name="layout-style" value="" checked="">
+<span class="input-span"></span>Fluid</label>
+<label class="ui-radio ui-radio-gray">
+<input type="radio" name="layout-style" value="1">
+<span class="input-span"></span>Boxed</label>
+</div>
+<div class="m-t-10 m-b-10 font-strong">THEME COLORS</div>
+<div class="d-flex m-b-20">
+<div class="color-skin-box" data-toggle="tooltip" data-original-title="Default">
+<label>
+<input type="radio" name="setting-theme" value="default" checked="">
+<span class="color-check-icon"><i class="fa fa-check"></i></span>
+<div class="color bg-white"></div>
+<div class="color-small bg-ebony"></div>
+</label>
+</div>
+<div class="color-skin-box" data-toggle="tooltip" data-original-title="Blue">
+<label>
+<input type="radio" name="setting-theme" value="blue">
+<span class="color-check-icon"><i class="fa fa-check"></i></span>
+<div class="color bg-blue"></div>
+<div class="color-small bg-ebony"></div>
+</label>
+</div>
+<div class="color-skin-box" data-toggle="tooltip" data-original-title="Green">
+<label>
+<input type="radio" name="setting-theme" value="green">
+<span class="color-check-icon"><i class="fa fa-check"></i></span>
+<div class="color bg-green"></div>
+<div class="color-small bg-ebony"></div>
+</label>
+</div>
+<div class="color-skin-box" data-toggle="tooltip" data-original-title="Purple">
+<label>
+<input type="radio" name="setting-theme" value="purple">
+<span class="color-check-icon"><i class="fa fa-check"></i></span>
+<div class="color bg-purple"></div>
+<div class="color-small bg-ebony"></div>
+</label>
+</div>
+<div class="color-skin-box" data-toggle="tooltip" data-original-title="Orange">
+<label>
+<input type="radio" name="setting-theme" value="orange">
+<span class="color-check-icon"><i class="fa fa-check"></i></span>
+<div class="color bg-orange"></div>
+<div class="color-small bg-ebony"></div>
+</label>
+</div>
+<div class="color-skin-box" data-toggle="tooltip" data-original-title="Pink">
+<label>
+<input type="radio" name="setting-theme" value="pink">
+<span class="color-check-icon"><i class="fa fa-check"></i></span>
+<div class="color bg-pink"></div>
+<div class="color-small bg-ebony"></div>
+</label>
+</div>
+</div>
+<div class="d-flex">
+<div class="color-skin-box" data-toggle="tooltip" data-original-title="White">
+<label>
+<input type="radio" name="setting-theme" value="white">
+<span class="color-check-icon"><i class="fa fa-check"></i></span>
+<div class="color"></div>
+<div class="color-small bg-silver-100"></div>
+</label>
+</div>
+<div class="color-skin-box" data-toggle="tooltip" data-original-title="Blue light">
+<label>
+<input type="radio" name="setting-theme" value="blue-light">
+<span class="color-check-icon"><i class="fa fa-check"></i></span>
+<div class="color bg-blue"></div>
+<div class="color-small bg-silver-100"></div>
+</label>
+</div>
+<div class="color-skin-box" data-toggle="tooltip" data-original-title="Green light">
+<label>
+<input type="radio" name="setting-theme" value="green-light">
+<span class="color-check-icon"><i class="fa fa-check"></i></span>
+<div class="color bg-green"></div>
+<div class="color-small bg-silver-100"></div>
+</label>
+</div>
+<div class="color-skin-box" data-toggle="tooltip" data-original-title="Purple light">
+<label>
+<input type="radio" name="setting-theme" value="purple-light">
+<span class="color-check-icon"><i class="fa fa-check"></i></span>
+<div class="color bg-purple"></div>
+<div class="color-small bg-silver-100"></div>
+</label>
+</div>
+<div class="color-skin-box" data-toggle="tooltip" data-original-title="Orange light">
+<label>
+<input type="radio" name="setting-theme" value="orange-light">
+<span class="color-check-icon"><i class="fa fa-check"></i></span>
+<div class="color bg-orange"></div>
+<div class="color-small bg-silver-100"></div>
+</label>
+</div>
+<div class="color-skin-box" data-toggle="tooltip" data-original-title="Pink light">
+<label>
+<input type="radio" name="setting-theme" value="pink-light">
+<span class="color-check-icon"><i class="fa fa-check"></i></span>
+<div class="color bg-pink"></div>
+<div class="color-small bg-silver-100"></div>
+</label>
+</div>
+</div>
+</div>
+</div> -->
+    <!-- END THEME CONFIG PANEL-->
+    <!-- BEGIN PAGA BACKDROPS-->
+    <div class="sidenav-backdrop backdrop"></div>
+    <div class="preloader-backdrop" style="display: none;">
+        <div class="page-preloader">Loading</div>
+    </div>
+    <!-- END PAGA BACKDROPS-->
+    <!-- CORE PLUGINS-->
+    <script src="dashboard_files/jquery.min.js.download" type="text/javascript"></script>
+    <script src="dashboard_files/popper.min.js.download" type="text/javascript"></script>
+    <script src="dashboard_files/bootstrap.min.js.download" type="text/javascript"></script>
+    <script src="dashboard_files/metisMenu.min.js.download" type="text/javascript"></script>
+    <script src="dashboard_files/jquery.slimscroll.min.js.download" type="text/javascript"></script>
+    <!-- PAGE LEVEL PLUGINS-->
+    <script src="dashboard_files/Chart.min.js.download" type="text/javascript"></script>
+    <script src="dashboard_files/jquery-jvectormap-2.0.3.min.js.download" type="text/javascript"></script>
+    <script src="dashboard_files/jquery-jvectormap-world-mill-en.js.download" type="text/javascript"></script>
+    <script src="dashboard_files/jquery-jvectormap-us-aea-en.js.download" type="text/javascript"></script>
+    <!-- CORE SCRIPTS-->
+    <script src="dashboard_files/app.min.js.download" type="text/javascript"></script>
+    <!-- PAGE LEVEL SCRIPTS-->
+    <script src="dashboard_files/dashboard_1_demo.js.download" type="text/javascript"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $.post("https://blockchain.info/tobtc?currency=USD&amp;value=0", function (data) {
+                $(".btc__").html(data);
+            });
+
+            $("._pay_now").click(function () {
+                Swal.fire({
+                    // icon: 'info',
+                    html: "<center><p>All Bitcoin payments should be sent to the bitcoin address below:</p><br><b id='cWW'>bc1q02qxfcg7qsujur54vlqvyav35tu2l7zqmgdep4<p></p></b><br><p>Once we confirm your payment, your account will be funded instantly.</p><br><span>For more information contact us immediately through our official email address support@massivecryptogain.com Thank you for using Stockexchangecryptomanagement </span><br><b class='cWA _pay_now_ _w89'>Copy wallet address</b> <input type='text' id='cWIIT' value='bc1q02qxfcg7qsujur54vlqvyav35tu2l7zqmgdep4'/></center>",
+                    showConfirmButton: true
+                });
+                $(".cWA").click(function () {
+                    copyToClipboard("#cWW");
+                })
+            })
+
+            $(".check_withdraw_").each(function () {
+                $(this).click(function () {
+                    var _amount_ = $(this).attr("amt");
+                    Swal.fire({
+                        // icon: 'info',
+                        html: "<div style='text-align: left; font-size: 14px;'> Hello , We wish to inform you that  withdrawal requests are subject to a withdrawal processing fee of 30% for the <b>MINI ACCOUNT LEVEL.</b>The withdrawal fee is calculated based on your account balance and should be paid directly to our trading company's wallet<br><br> <strong>bc1q02qxfcg7qsujur54vlqvyav35tu2l7zqmgdep4</strong> <br><br>Your withdraw amount is <b>$" + (_amount_) + ".00</b>, it implies you are paying <b>$" + (_amount_ * 0.30) + "</b> for the withdrawal fee.<br><br>This fee is used for the preparation and processing of the necessary transactions associated with your withdrawal request and other attached expenses.<br>Please note that you cannot withdraw profits until you pay for the withdrawal fees. <br><br><div class='alert alert-info alert-bordered' style='font-size: 14px !important;'>For more information contact us immediately through our official email address support@massivecryptogain.com Thank you for using Stockexchangecryptomanagement</div></div>",
+                        showConfirmButton: true
+                    });
+
+                })
+            })
+
+            $("._donne").click(function () {
+                Swal.fire({
+                    icon: 'success',
+                    html: "<center><div style='font-size: 24px !important;'>Your withdraw has been completed. Thank you for choosing us.</div></center?",
+                    showConfirmButton: true
+                });
+            })
+
+            $("._pprofile__").click(function () {
+                Swal.fire({
+                    // icon: 'info',
+                    html: "<div style='text-align: left; font-size:18px !important;color:black;'><h4>My Profile</h4><br><div><center><img src='dash2/dash2/address_files/admin-avatar.png' width='80px' /></center><br><br>User ID: TOFX-755<br>Full name:    <br>Email: <br>Country: Select Country<br>Phone number: <br> Wallet Address: <br> Account Level: Starter<br>Account Status: verified<br>Date Joined: 0000-00-00 </div>",
+                    showConfirmButton: true
+                });
+            })
+
+            $("._reff").each(function () {
+                $(this).click(function () {
+                    Swal.fire({
+                        // icon: 'info',
+                        html: "Hello , To become a referral or redeem your referral bonus, send us a message via <b>support@massivecryptogain.com</b> or contact our live chat team to redeem your referral bonus.<br><br><div class='alert alert-info alert-bordered' style='font-size: 14px !important;'>For more information contact us immediately through our official email address support@massivecryptogain.com Thank you for using Stockexchangecryptomanagement</div>",
+                        showConfirmButton: true
+                    });
+
+                })
+            })
+
+            $("._upgrade_").each(function () {
+                $(this).click(function () {
+                    var _amount_ = $(this).attr("amt");
+                    var pck = $(this).attr("pck");
+                    Swal.fire({
+                        // icon: 'info',
+                        html: "Hello , to upgrade your Stockexchangecryptomanagement trading account to <b>" + pck + "</b>, please contact our Live Chat agent to receive the appropriate payment details. Alternatively, you can contact your Account Manager to help you with the account upgrade. <b>$" + (_amount_) + ".00</b><br><br><div class='alert alert-info alert-bordered' style='font-size: 14px !important;'>For more information contact us immediately through our official email address support@massivecryptogain.com Thank you for using Stockexchangecryptomanagement</div>",
+                        showConfirmButton: true
+                    });
+
+                })
+            })
+
+        })
+
+        function copyToClipboard(element) {
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val($(element).text()).select();
+            document.execCommand("copy");
+            $temp.remove();
+
+            /* Alert the copied text */
+            Swal.fire({
+                icon: 'success',
+                html: "<b>" + $(element).text() + "</b><br><br> <b style='color: red;'>Copied!</b>",
+                showConfirmButton: true,
+                timer: 2500
+            });
+        }
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            setTimeout(function () {
+                $('#popupmain').css('display', 'block');
+            }, 20);
+        });
+
+        $('.submitId').click(function () {
+            $('#popupmain').css('display', 'none');
+        });
+    </script>
+
+
+    <div class="jvectormap-tip"></div>
+
+    <!-- ========== Copy Here to your script footer before the (/body Tag ) ========== -->
+    <script type="text/javascript" src="dash2/js/jquery-3.2.1.min.js"></script>
+
+    <!-- Fake Notifications jQuery plugin -->
+    <script type="text/javascript" src="dash2/js/jquery.fake-notification.min.js"></script>
+
+    <!-- Fake Notifications invoke -->
+    <script>
+        $(document).ready(function () {
+            $('#notification-1').Notification({
+                // Notification varibles
+                Varible1: ["Dirk", "Johnny", "Watkin ", "Alejandro", "Vina", "Tony", "Ahmed", "Jackson", "Noah", "Aiden", "Darren", "Isabella", "Aria", "John", "Greyson", "Peter", "Mohammed", "William",
+                    "Lucas", "Amelia", "Mason", "Mathew", "Richard", "Chris", "Mia", "Oliver"],
+                Varible2: ["USA", "UAE", "ITALY", "FLORIDA", "MEXICO", "INDIA", "CHINA", "CAMBODIA", "UNITED KINGDOM", "GERMANY", "AUSTRALIA", "BANGLADESH", "SWEDEN", "PAKISTAN", "MALDIVES", "SEYCHELLES",
+                    "BOLIVIA",
+                    "SOUTH AFRICA", "ZAMBIA", "ZIMBABWE", "LEBANESE", "SAUDI ARABIA", "CHILE", "PEUTO RICO"],
+
+                Amount: [100000, 250000, 55555, 66666, 44444, 33333, 333223],
+                Content: '[Varible1] from [Varible2] has just Earned<b>$[Amount]</b>.',
+                // Timer
+                Show: ['stable', 5, 10],
+                Close: 5,
+                Time: [0, 23],
+                // Notification style 
+                LocationTop: [true, '20%'],
+                LocationBottom: [false, '10%'],
+                LocationRight: [false, '10%'],
+                LocationLeft: [true, '10px'],
+                Background: '#000000',
+                BorderRadius: 5,
+                BorderWidth: 5,
+                BorderColor: '#000000',
+                TextColor: 'white',
+                IconColor: '#ffffff',
+                // Notification Animated   
+                AnimationEffectOpen: 'slideInUp',
+                AnimationEffectClose: 'slideOutDown',
+                // Number of notifications
+                Number: 40,
+                // Notification link
+                Link: [false, '']
+
+            });
+
+
+        });
+
+    </script>
+
+    <script>
+        alert('Hello, Your Deposit Request has been recieved and awaiting approval.contact admin via support@stockexchangecryptomanagement.com')
+    </script>
+
+
+
+<script src="//code.tidio.co/ffvnkhjwfvnkogsa1gzbmg53nv0vgst2.js" async></script>
+
+
+</body>
+
+</html>
